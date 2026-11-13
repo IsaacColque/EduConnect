@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Docente - EduConnect</title>
+    <!-- Fuentes y Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="/maestro/css/sidebar.css">
+    <link rel="stylesheet" href="/maestro/css/cursos.css">
+    <link rel="icon" type="image/png" href="/imagenes/icono4.png">
+
+    <!-- Estilos adicionales para la gestión docente, vistas y modal de calificación -->
+    <style>
+        .hidden {
+            display: none !important;
+        }
+
+        .course-detail-view, .activity-detail-view {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 15px;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 1px solid #eef0f5;
+            padding-bottom: 18px;
+            margin-bottom: 20px;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-back {
+            background: #f3f5f9;
+            border: 1px solid #dce1eb;
+            color: #333;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-back:hover {
+            background: #e5e9f2;
+        }
+
+        .btn-primary-action {
+            background: #0d6efd;
+            border: none;
+            color: #ffffff;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary-action:hover {
+            background: #0b5ed7;
+        }
+
+        .detail-course-info h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #1e293b;
+        }
+
+        .detail-course-info p {
+            margin: 3px 0 0;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* Formulario para subir trabajo */
+        .upload-panel {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .upload-panel h4 {
+            margin: 0 0 15px;
+            font-size: 16px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0d6efd;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        /* Pestañas internas */
+        .detail-tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 18px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: #0d6efd;
+        }
+
+        .tab-btn.active {
+            color: #0d6efd;
+            border-bottom-color: #0d6efd;
+            font-weight: 600;
+        }
+
+        /* Lista de actividades */
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 18px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #fafbfc;
+            flex-wrap: wrap;
+            gap: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .activity-item.clickable:hover {
+            border-color: #0d6efd;
+            background: #fdfeff;
+        }
+
+        .activity-item.closed-item {
+            background: #fff8f8;
+            border-color: #f5c2c7;
+        }
+
+        .activity-info h4 {
+            margin: 0 0 4px;
+            font-size: 15px;
+            color: #1e293b;
+        }
+
+        .activity-info p {
+            margin: 0 0 6px;
+            font-size: 13px;
+            color: #475569;
+        }
+
+        .activity-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .activity-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .badge-abierto { background: #d1e7dd; color: #0f5132; }
+        .badge-cerrado { background: #f8d7da; color: #842029; }
+        .badge-nota { background: #e2e8f0; color: #334155; font-weight: 600; }
+
+        .btn-icon-delete, .btn-enter, .btn-grade {
+            background: none;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+        }
+
+        .btn-icon-delete {
+            color: #dc3545;
+            width: 32px;
+            height: 32px;
+        }
+
+        .btn-icon-delete:hover {
+            background: #dc3545;
+            color: #fff;
+            border-color: #dc3545;
+        }
+
+        .btn-enter {
+            background: #f8fafc;
+            color: #0d6efd;
+            padding: 6px 12px;
+            border-color: #cbd5e1;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-enter:hover {
+            background: #0d6efd;
+            color: #fff;
+            border-color: #0d6efd;
+        }
+
+        .btn-grade {
+            background: #198754;
+            color: #fff;
+            padding: 6px 12px;
+            border-color: #198754;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-grade:hover {
+            background: #157347;
+        }
+
+        /* Tabla de entregas */
+        .submissions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .submissions-table th, .submissions-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .submissions-table th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .submissions-table tr:hover {
+            background: #fafbfc;
+        }
+
+        /* Modal flotante para calificar */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 14px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .modal-box h3 {
+            margin: 0 0 15px;
+            font-size: 18px;
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar lateral -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="../imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="Logo de EduConnect">
+            </div>
+            
+            <ul class="menu">
+                <li>
+                    <a href="/maestro/interfaz_menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li class="activo">
+                    <a href="/maestro/cursos.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Asignatura</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/maestro/avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/evento.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/perfil.html">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/configuracion.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="salir">
+                <a href="../iniciar_sesion.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="navbar-left">
+                    <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <div class="navbar-right">
+                    <div class="user-profile-top">
+                        <div class="user-info-text">
+                            <span class="user-name"> Sebastian Guardia </span>
+                            <span class="user-role">Profesor</span>
+                        </div>
+                        <div class="avatar-container"><i class="fa-solid fa-circle-user"></i></div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body page-body">
+                
+                <div class="calendar-header-panel">
+                    <h2>Gestión de Cursos - EduConnect</h2>
+                    <span class="user-role" style="font-size: 14px; font-weight: 500;">Ciclo Lectivo: 2026</span>
+                </div>
+
+                <!-- VISTA 1: LISTA DE CURSOS -->
+                <div id="courses-list-view">
+                    <div class="search-bar-container">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search-input" placeholder="Buscar cursos...">
+                    </div>
+
+                    <div class="courses-grid">
+                        <div class="course-card">
+                            <div class="course-icon azul-claro"><i class="fa-solid fa-chart-line"></i></div>
+                            <h3>Matemáticas V</h3>
+                            <p class="teacher-name">5° Año "A" • 32 Alumnos</p>
+                            <div class="progress-info">
+                                <span>75% del programa dictado</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                            <button class="btn-details" onclick="abrirDetalleCurso('matematicas')">Gestionar curso</button>
+                        </div>
+
+                        <div class="course-card">
+                            <div class="course-icon naranja"><i class="fa-solid fa-book-open"></i></div>
+                            <h3>Lengua y Literatura IV</h3>
+                            <p class="teacher-name">4° Año "B" • 28 Alumnos</p>
+                            <div class="progress-info">
+                                <span>75% del programa dictado</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                            <button class="btn-details" onclick="abrirDetalleCurso('lengua')">Gestionar curso</button>
+                        </div>
+
+                        <div class="course-card">
+                            <div class="course-icon verde"><i class="fa-solid fa-atom"></i></div>
+                            <h3>Física II</h3>
+                            <p class="teacher-name">5° Año "B" • 30 Alumnos</p>
+                            <div class="progress-info">
+                                <span>75% del programa dictado</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                            <button class="btn-details" onclick="abrirDetalleCurso('fisica')">Gestionar curso</button>
+                        </div>
+
+                        <div class="course-card">
+                            <div class="course-icon rojo"><i class="fa-solid fa-landmark"></i></div>
+                            <h3>Historia III</h3>
+                            <p class="teacher-name">3° Año "A" • 35 Alumnos</p>
+                            <div class="progress-info">
+                                <span>75% del programa dictado</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                            <button class="btn-details" onclick="abrirDetalleCurso('historia')">Gestionar curso</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VISTA 2: PANEL GENERAL DEL CURSO -->
+                <div id="course-detail-view" class="course-detail-view hidden">
+                    <div class="detail-top-bar">
+                        <div class="detail-course-info">
+                            <h3 id="detail-title">Nombre del Curso</h3>
+                            <p id="detail-subtitle">Comisión y Alumnos</p>
+                        </div>
+                        <div class="top-actions">
+                            <button class="btn-primary-action" onclick="toggleFormularioSubida()">
+                                <i class="fa-solid fa-plus"></i> Subir nuevo trabajo
+                            </button>
+                            <button class="btn-back" onclick="volverACursos()">
+                                <i class="fa-solid fa-arrow-left"></i> Volver a mis cursos
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="upload-form-panel" class="upload-panel hidden">
+                        <h4><i class="fa-solid fa-cloud-arrow-up"></i> Publicar nueva actividad con cierre automático</h4>
+                        <form id="form-nueva-actividad" onsubmit="guardarNuevaActividad(event)">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="tipo-actividad">Categoría</label>
+                                    <select id="tipo-actividad" required>
+                                        <option value="tareas">Tarea</option>
+                                        <option value="practicos">Trabajo Práctico</option>
+                                        <option value="evaluaciones">Evaluación</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="titulo-actividad">Título del trabajo</label>
+                                    <input type="text" id="titulo-actividad" placeholder="Ej: TP N° 5 - Ecuaciones" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha-limite">Fecha y hora límite de entrega</label>
+                                    <input type="datetime-local" id="fecha-limite" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="archivo-actividad">Archivo adjunto (Consigna)</label>
+                                    <input type="file" id="archivo-actividad">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcion-actividad">Consigna / Instrucciones</label>
+                                <textarea id="descripcion-actividad" rows="2" placeholder="Escribe las instrucciones..."></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn-back" onclick="toggleFormularioSubida()">Cancelar</button>
+                                <button type="submit" class="btn-primary-action"><i class="fa-solid fa-check"></i> Publicar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="detail-tabs">
+                        <button class="tab-btn active" data-tab="tareas" onclick="cambiarTab('tareas', this)">Tareas</button>
+                        <button class="tab-btn" data-tab="practicos" onclick="cambiarTab('practicos', this)">Trabajos Prácticos</button>
+                        <button class="tab-btn" data-tab="evaluaciones" onclick="cambiarTab('evaluaciones', this)">Evaluaciones</button>
+                    </div>
+
+                    <div id="tab-content-container" class="activity-list"></div>
+                </div>
+
+                <!-- VISTA 3: DETALLE DE TAREA Y ENTREGAS DE ALUMNOS -->
+                <div id="activity-detail-view" class="activity-detail-view hidden">
+                    <div class="detail-top-bar">
+                        <div class="detail-course-info">
+                            <h3 id="act-detail-title">Título de la Tarea</h3>
+                            <p id="act-detail-meta">Cierre y Estado</p>
+                        </div>
+                        <button class="btn-back" onclick="volverAlCurso()">
+                            <i class="fa-solid fa-arrow-left"></i> Volver al curso
+                        </button>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="margin: 0 0 5px; color: #1e293b; font-size: 15px;">Consigna del Docente:</h4>
+                        <p id="act-detail-desc" style="margin: 0; color: #475569; font-size: 14px;"></p>
+                    </div>
+
+                    <h4 style="margin: 20px 0 10px; color: #1e293b; font-size: 16px;">
+                        <i class="fa-solid fa-users-rectangle"></i> Listado de entregas de alumnos
+                    </h4>
+                    
+                    <div style="overflow-x: auto;">
+                        <table class="submissions-table">
+                            <thead>
+                                <tr>
+                                    <th>Alumno</th>
+                                    <th>Estado</th>
+                                    <th>Fecha de entrega</th>
+                                    <th>Archivo</th>
+                                    <th>Calificación</th>
+                                </tr>
+                            </thead>
+                            <tbody id="submissions-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL PARA CALIFICAR -->
+    <div id="grade-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h3>Calificar Alumno</h3>
+            <p id="modal-student-name" style="margin: 0 0 15px; font-size: 14px; color: #64748b; font-weight: 500;"></p>
+            <form onsubmit="guardarCalificacion(event)">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="input-nota">Calificación numérica / Concepto</label>
+                    <input type="text" id="input-nota" placeholder="Ej: 9.5 o Aprobado" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-back" onclick="cerrarModalCalcular()">Cancelar</button>
+                    <button type="submit" class="btn-grade"><i class="fa-solid fa-check"></i> Guardar calificación</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+
+        const datosCursosDocente = {
+            matematicas: {
+                titulo: "Matemáticas V",
+                subtitulo: "5° Año 'A' • 32 Alumnos inscritos",
+                tareas: [
+                    {
+                        id: 1,
+                        titulo: "Guía de ejercicios: Derivadas e Integrales",
+                        descripcion: "Resolver los puntos 1 al 10 de la guía adjunta y subir en formato PDF.",
+                        archivo: "Guia_Derivadas_2026.pdf",
+                        fechaLimite: "2026-11-25T23:59",
+                        entregasLista: [
+                            { idSub: 101, alumno: "Colque, Isaac", estado: "Entregado a tiempo", fecha: "18 Nov, 14:32 hs", archivo: "derivadas_isaac.pdf", nota: "Sin calificar" },
+                            { idSub: 102, alumno: "Gómez, Sofía", estado: "Entregado a tiempo", fecha: "19 Nov, 10:15 hs", archivo: "tp_gomez.pdf", nota: "9.0" },
+                            { idSub: 103, alumno: "Pérez, Lucas", estado: "Pendiente", fecha: "-", archivo: "-", nota: "-" }
+                        ]
+                    }
+                ],
+                practicos: [],
+                evaluaciones: []
+            },
+            lengua: { titulo: "Lengua y Literatura IV", subtitulo: "4° Año 'B'", tareas: [], practicos: [], evaluaciones: [] },
+            fisica: { titulo: "Física II", subtitulo: "5° Año 'B'", tareas: [], practicos: [], evaluaciones: [] },
+            historia: { titulo: "Historia III", subtitulo: "3° Año 'A'", tareas: [], practicos: [], evaluaciones: [] }
+        };
+
+        let idCursoActual = null;
+        let tabActual = 'tareas';
+        let actividadSeleccionada = null;
+        let alumnoSeleccionadoIndex = null;
+
+        function abrirDetalleCurso(idCurso) {
+            idCursoActual = idCurso;
+            const curso = datosCursosDocente[idCurso];
+            if (!curso) return;
+
+            document.getElementById('detail-title').textContent = curso.titulo;
+            document.getElementById('detail-subtitle').textContent = curso.subtitulo;
+
+            document.getElementById('courses-list-view').classList.add('hidden');
+            document.getElementById('activity-detail-view').classList.add('hidden');
+            document.getElementById('course-detail-view').classList.remove('hidden');
+            document.getElementById('upload-form-panel').classList.add('hidden');
+
+            tabActual = 'tareas';
+            actualizarBotonesTab();
+            renderizarActividades();
+        }
+
+        function volverACursos() {
+            idCursoActual = null;
+            document.getElementById('course-detail-view').classList.add('hidden');
+            document.getElementById('activity-detail-view').classList.add('hidden');
+            document.getElementById('courses-list-view').classList.remove('hidden');
+        }
+
+        function volverAlCurso() {
+            document.getElementById('activity-detail-view').classList.add('hidden');
+            document.getElementById('course-detail-view').classList.remove('hidden');
+        }
+
+        function toggleFormularioSubida() {
+            const panel = document.getElementById('upload-form-panel');
+            panel.classList.toggle('hidden');
+            document.getElementById('tipo-actividad').value = tabActual;
+        }
+
+        function guardarNuevaActividad(event) {
+            event.preventDefault();
+            if (!idCursoActual) return;
+
+            const categoria = document.getElementById('tipo-actividad').value;
+            const titulo = document.getElementById('titulo-actividad').value.trim();
+            const fechaLimite = document.getElementById('fecha-limite').value;
+            const descripcion = document.getElementById('descripcion-actividad').value.trim();
+            const inputArchivo = document.getElementById('archivo-actividad');
+            const nombreArchivo = inputArchivo.files.length > 0 ? inputArchivo.files[0].name : "Consigna.pdf";
+
+            const nuevoTrabajo = {
+                id: Date.now(),
+                titulo: titulo,
+                descripcion: descripcion || "Sin instrucciones adicionales.",
+                archivo: nombreArchivo,
+                fechaLimite: fechaLimite,
+                entregasLista: [
+                    { idSub: Date.now() + 1, alumno: "Pérez, Lucas", estado: "Pendiente", fecha: "-", archivo: "-", nota: "-" }
+                ]
+            };
+
+            datosCursosDocente[idCursoActual][categoria].unshift(nuevoTrabajo);
+
+            document.getElementById('form-nueva-actividad').reset();
+            document.getElementById('upload-form-panel').classList.add('hidden');
+
+            tabActual = categoria;
+            actualizarBotonesTab();
+            renderizarActividades();
+        }
+
+        function eliminarActividad(index, event) {
+            event.stopPropagation();
+            if (!idCursoActual) return;
+            datosCursosDocente[idCursoActual][tabActual].splice(index, 1);
+            renderizarActividades();
+        }
+
+        function cambiarTab(categoria, botonElemento) {
+            tabActual = categoria;
+            actualizarBotonesTab();
+            renderizarActividades();
+        }
+
+        function actualizarBotonesTab() {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tabActual);
+            });
+        }
+
+        function formatearFecha(fechaISO) {
+            const fecha = new Date(fechaISO);
+            return fecha.toLocaleString('es-AR', {
+                day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+            });
+        }
+
+        function renderizarActividades() {
+            if (!idCursoActual) return;
+            const contenedor = document.getElementById('tab-content-container');
+            const items = datosCursosDocente[idCursoActual][tabActual] || [];
+            const ahora = new Date();
+
+            if (items.length === 0) {
+                contenedor.innerHTML = `<p style="color:#64748b; padding: 15px 0;">No hay elementos registrados en esta categoría.</p>`;
+                return;
+            }
+
+            contenedor.innerHTML = items.map((item, index) => {
+                const fechaCierre = new Date(item.fechaLimite);
+                const estaCerrado = ahora >= fechaCierre;
+                const totalEntregas = item.entregasLista ? item.entregasLista.filter(e => e.estado !== "Pendiente").length : 0;
+
+                const badgeHTML = estaCerrado
+                    ? `<span class="badge badge-cerrado"><i class="fa-solid fa-lock"></i> Cerrado</span>`
+                    : `<span class="badge badge-abierto"><i class="fa-solid fa-lock-open"></i> Abierto</span>`;
+
+                return `
+                    <div class="activity-item clickable" onclick="entrarAActividad(${index})">
+                        <div class="activity-info">
+                            <h4>${item.titulo}</h4>
+                            <p>${item.descripcion}</p>
+                            <div class="activity-meta">
+                                <span><i class="fa-regular fa-clock"></i> <strong>Cierre:</strong> ${formatearFecha(item.fechaLimite)} hs</span>
+                                <span><i class="fa-solid fa-paperclip"></i> ${item.archivo}</span>
+                                <span><i class="fa-solid fa-users"></i> Entregados: ${totalEntregas}</span>
+                            </div>
+                        </div>
+                        <div class="activity-right">
+                            ${badgeHTML}
+                            <button class="btn-enter"><i class="fa-solid fa-eye"></i> Ver entregas</button>
+                            <button class="btn-icon-delete" title="Eliminar" onclick="eliminarActividad(${index}, event)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function entrarAActividad(index) {
+            const item = datosCursosDocente[idCursoActual][tabActual][index];
+            if (!item) return;
+            actividadSeleccionada = item;
+
+            document.getElementById('act-detail-title').textContent = item.titulo;
+            document.getElementById('act-detail-desc').textContent = item.descripcion;
+            
+            const ahora = new Date();
+            const estaCerrado = ahora >= new Date(item.fechaLimite);
+            document.getElementById('act-detail-meta').textContent = `Cierre: ${formatearFecha(item.fechaLimite)} — ${estaCerrado ? 'Plazo cerrado' : 'Abierto'}`;
+
+            renderizarTablaEntregas();
+
+            document.getElementById('course-detail-view').classList.add('hidden');
+            document.getElementById('activity-detail-view').classList.remove('hidden');
+        }
+
+        function renderizarTablaEntregas() {
+            const tbody = document.getElementById('submissions-table-body');
+            if (!actividadSeleccionada.entregasLista || actividadSeleccionada.entregasLista.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#64748b;">No hay registros de alumnos.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = actividadSeleccionada.entregasLista.map((sub, idx) => {
+                const tieneNota = sub.nota !== "Sin calificar" && sub.nota !== "-";
+                const badgeNota = tieneNota 
+                    ? `<span class="badge badge-nota"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> ${sub.nota}</span>` 
+                    : `<span style="color: #94a3b8; font-size: 12px;">Sin calificar</span>`;
+
+                return `
+                    <tr>
+                        <td><strong>${sub.alumno}</strong></td>
+                        <td><span class="badge ${sub.estado.includes('Entregado') ? 'badge-abierto' : 'badge-cerrado'}">${sub.estado}</span></td>
+                        <td>${sub.fecha}</td>
+                        <td>${sub.archivo !== '-' ? `<a href="#" style="color:#0d6efd; text-decoration:none;"><i class="fa-solid fa-download"></i> ${sub.archivo}</a>` : 'Sin archivo'}</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                ${badgeNota}
+                                <button class="btn-grade" onclick="abrirModalCalificar(${idx})">
+                                    <i class="fa-solid fa-pen-to-square"></i> Calificar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Abrir modal para calificar a un alumno específico
+        function abrirModalCalificar(studentIndex) {
+            alumnoSeleccionadoIndex = studentIndex;
+            const alumno = actividadSeleccionada.entregasLista[studentIndex];
+            
+            document.getElementById('modal-student-name').textContent = `Alumno: ${alumno.alumno}`;
+            document.getElementById('input-nota').value = alumno.nota !== "Sin calificar" && alumno.nota !== "-" ? alumno.nota : "";
+            document.getElementById('grade-modal').classList.remove('hidden');
+        }
+
+        function cerrarModalCalcular() {
+            document.getElementById('grade-modal').classList.add('hidden');
+            alumnoSeleccionadoIndex = null;
+        }
+
+        // Guardar la nota y actualizar automáticamente
+        function guardarCalificacion(event) {
+            event.preventDefault();
+            if (alumnoSeleccionadoIndex === null || !actividadSeleccionada) return;
+
+            const nuevaNota = document.getElementById('input-nota').value.trim();
+            actividadSeleccionada.entregasLista[alumnoSeleccionadoIndex].nota = nuevaNota;
+
+            cerrarModalCalcular();
+            renderizarTablaEntregas();
+        }
+
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const texto = e.target.value.toLowerCase();
+                document.querySelectorAll('.course-card').forEach(card => {
+                    const titulo = card.querySelector('h3').textContent.toLowerCase();
+                    const sub = card.querySelector('.teacher-name').textContent.toLowerCase();
+                    card.style.display = (titulo.includes(texto) || sub.includes(texto)) ? '' : 'none';
+                });
+            });
+        }
+    </script>
+</body>
+</html> 

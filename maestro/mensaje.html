@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Mensajes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="/maestro/css/sidebar.css">
+    <link rel="stylesheet" href="/maestro/css/mensaje.css">
+    <link rel="icon" type="image/png" href="../imagenes/icono4.png">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- BARRA LATERAL CON ID AÑADIDO -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="../imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="EduConnect Logo">
+            </div>
+
+            <ul class="menu">
+                <li> 
+                    <a href="/maestro/interfaz_menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a> 
+                </li>
+                <li>
+                    <a href="/maestro/cursos.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Asignatura</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/evento.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <!-- Clase "activo" para que brille -->
+                <li class="activo">
+                    <a href="/maestro/mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/perfil.html">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/configuracion.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="salir">
+                <a href="../iniciar_sesion.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="main-content">
+            
+            <header class="top-bar">
+                <div class="navbar-left">
+                    <!-- BOTÓN HAMBURGUESA CON ID AÑADIDO -->
+                    <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <div class="navbar-right">
+                    <div class="user-profile-top">
+                        <div class="user-info-text">
+                            <span class="user-name"> Sebastian Guardia </span>
+                            <span class="user-role">Profesor</span>
+                        </div>
+                        <div class="avatar-container"><i class="fa-solid fa-circle-user"></i></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CUERPO DE LA PÁGINA -->
+            <div class="page-body">
+                
+                <div class="chat-container" style="display: flex; background: white; border-radius: 12px; height: calc(100vh - 160px); min-height: 450px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); overflow: hidden;">
+                    
+                    <!-- BANDEJA DE ENTRADA (IZQUIERDA) -->
+                    <div class="chat-sidebar" style="width: 300px; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column;">
+                        <div style="padding: 20px; border-bottom: 1px solid #e2e8f0;">
+                            <h3 style="margin: 0; font-size: 18px; color: #1a202c;">Bandeja de Entrada</h3>
+                        </div>
+                        
+                        <div class="lista-contactos" style="flex: 1; overflow-y: auto;">
+                            <div class="contacto-item" style="display: flex; align-items: center; gap: 12px; padding: 15px 20px; background: #f8f9fa; border-left: 4px solid #0A47B8; cursor: pointer;">
+                                <i class="fa-solid fa-circle-user" style="font-size: 30px; color: #718096;"></i>
+                                <div>
+                                    <h4 style="margin: 0; font-size: 14px; color: black;">Prof.Sebastian Guardia</h4>
+                                    <p style="margin: 0; font-size: 12px; color: black; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">Recibido el diagrama...</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contacto-item" style="display: flex; align-items: center; gap: 12px; padding: 15px 20px; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                                <i class="fa-solid fa-circle-user" style="font-size: 30px; color: #cbd5e0;"></i>
+                                <div>
+                                    <h4 style="margin: 0; font-size: 14px; color: #2d3748;">Preceptoria Turno Tarde</h4>
+                                    <p style="margin: 0; font-size: 12px; color: #a0aec0;">Recuerden traer la constancia...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CHAT ACTIVO (DERECHA) -->
+                    <div class="chat-main" style="flex: 1; display: flex; flex-direction: column; background: #fafafa;">
+                        
+                        <div class="chat-header" style="padding: 15px 20px; background: #ffffff; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-circle-user" style="font-size: 24px; color: #718096;"></i>
+                            <span style="font-weight: 600; color: #2d3748;">Prof. Guardia Sebastian (Practica Profecionalizantes)</span>
+                        </div>
+
+                        <div class="chat-messages" style="flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;">
+                            
+                            <div style="max-width: 70%; background: #ffffff; padding: 12px 16px; border-radius: 12px 12px 12px 0; align-self: flex-start; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
+                                <p style="margin: 0; font-size: 13.5px; color: #2d3748;">Hola Isaac, estuve revisando el avance del sistema. ¿Pudiste corregir las relaciones del diagrama de clases?</p>
+                                <span style="display: block; text-align: right; font-size: 10px; color: #a0aec0; margin-top: 5px;">10:30 AM</span>
+                            </div>
+
+                            <div style="max-width: 70%; background: #0A47B8; color: white; padding: 12px 16px; border-radius: 12px 12px 0 12px; align-self: flex-end; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <p style="margin: 0; font-size: 13.5px;">¡Hola Profesor! Sí, modifiqué la herencia y agregué los métodos que faltaban. Hoy por la tarde subo la documentación técnica corregida.</p>
+                                <span style="display: block; text-align: right; font-size: 10px; color: rgba(255,255,255,0.7); margin-top: 5px;">10:45 AM</span>
+                            </div>
+
+                        </div>
+
+                        <div class="chat-input-area" style="padding: 15px 20px; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; gap: 15px; align-items: center;">
+                            <input type="text" placeholder="Escribe un mensaje aquí..." style="flex: 1; padding: 12px 15px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 14px; outline: none;">
+                            <button style="background: #0A47B8; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+
+                    </div> <!-- Fin chat-main -->
+                </div> <!-- Fin chat-container -->
+            </div> <!-- Fin page-body -->
+        </div> <!-- Fin main-content -->
+    </div> <!-- Fin dashboard-container -->
+
+    <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+
+</body>
+</html>

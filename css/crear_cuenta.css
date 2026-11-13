@@ -1,0 +1,168 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px; /* Un poco más amplio para que las tarjetas respiren mejor */
+  box-sizing: border-box;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.group label {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.group input {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px; 
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.group input:focus {
+  border-color: #2980b9;
+}
+.group select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px; 
+  outline: none;
+  background-color: #ffffff;
+  color: #374151;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.group select:focus {
+  border-color: #2980b9;
+}
+
+/* --- ESTILOS PARA LAS TARJETAS DE ROLES --- */
+.roles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.role-card {
+  display: block;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Ocultamos el radio button clásico pero mantenemos su funcionalidad */
+.role-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.role-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.role-icon {
+  font-size: 1.3rem;
+}
+
+.role-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-info strong {
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.role-info small {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Efecto cuando el usuario pasa el mouse o selecciona una tarjeta */
+.role-card:hover .role-content {
+  border-color: #2980b9;
+  background-color: #f0f7fc;
+}
+
+.role-card input[type="radio"]:checked + .role-content {
+  border-color: #2980b9;
+  background-color: #eaf3fb;
+  box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.15);
+}
+
+.role-card input[type="radio"]:checked + .role-content strong {
+  color: #2980b9;
+}
+
+/* Estilos unificados para el botón */
+.btn-small {
+  width: 100%;
+  height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background-color: #add8e6; 
+  color: #1f2937;
+  border-radius: 20px; 
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 15px;
+}
+
+.btn-small:hover {
+  background-color: #2980b9;
+  color: #ffffff;
+  transform: scale(1.02);
+}
+
+.link-text {
+  font-size: 13px;
+  color: #4b5563;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.link {
+  color: #2980b9;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

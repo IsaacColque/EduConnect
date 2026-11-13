@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Eventos</title>
+    <link rel="icon" type="image/png" href="imagenes/icono4.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/evento.css">
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <!-- SIDEBAR INTEGRADO DIRECTAMENTE -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="EduConnect Logo">
+            </div>
+            
+            <ul class="menu">
+                <li>
+                    <a href="Interfaz_Menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mis_cursos.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Cursos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="sistema_calificaciones.html">
+                        <i class="fa-regular fa-clipboard"></i>
+                        <span>Calificaciones</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li class="activo"> 
+                    <a href="eventos.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="perfil.html">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="configuracion.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="salir">
+                <a href="iniciar_sesion.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="main-content">
+            <header class="top-navbar">
+                <div class="navbar-left">
+                    <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <div class="navbar-right">
+                    <div class="user-profile-top">
+                        <div class="user-info-text">
+                            <span class="user-name"> Isaac Colque </span>
+                            <span class="user-role">Estudiante</span>
+                        </div>
+                        <div class="avatar-container" aria-hidden="true">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="page-body">
+                <div class="calendar-center-container">
+                    <div class="calendar-header-panel">
+                        <h2>Panel de Eventos Escolares - EduConnect</h2>
+                        <div class="calendar-controls">
+                            <div class="select-wrapper">
+                                <select>
+                                    <option>Este Mes</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="search-container">
+                        <div class="search-input-wrapper">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" placeholder="Buscar">
+                        </div>
+                    </div>
+
+                    <div class="calendar-grid-card">
+                        <div class="weekdays-grid">
+                            <div>Lun</div>
+                            <div>Mar</div>
+                            <div>Mié</div>
+                            <div>Jue</div>
+                            <div>Vie</div>
+                            <div>Sáb</div>
+                            <div>Dom</div>
+                        </div>
+
+                        <div class="days-grid">
+                            <div class="day-cell day-prev">29</div>
+                            <div class="day-cell day-prev">30</div>
+                            <div class="day-cell day-prev">31</div>
+                            <div class="day-cell">
+                                <span class="day-number">1</span>
+                                <div class="event-bar event-blue" style="width: 290%;">Feria Escolar de Ciencias</div>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">3</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">4</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">5</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">6</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">7</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">8</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">10</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">11</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">12</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">13</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">14</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">15</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">17</span>
+                                <div class="event-bar event-darkblue">Reunión de Padres</div>
+                                </div>
+                            <div class="day-cell">
+                                <span class="day-number">18</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">19</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">20</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">21</span>
+                                <div class="event-bar event-indigo" style="width: 295%;">Concurso de Debate Regional</div>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">22</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">23</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">24</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">25</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">26</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">27</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">28</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">29</span>
+                            </div>
+                            <div class="day-cell">
+                                <span class="day-number">31</span>
+                            </div>
+                            <div class="day-cell day-next">1</div>
+                            <div class="day-cell day-next">2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="lista-eventos-inferior">
+                    <div class="tarjeta-actividad-detalle">
+                        <div class="actividad-izquierda">
+                            <div class="icono-destacado bg-light-blue">
+                                <i class="fa-solid fa-flask"></i>
+                            </div>
+                            <div class="actividad-cuerpo">
+                                <h3>Feria Escolar de Ciencias</h3>
+                                <p class="actividad-meta">
+                                    <span><i class="fa-solid fa-calendar-days"></i> May 1</span>
+                                    <span><i class="fa-regular fa-clock"></i> Hora: 5 p.m.</span>
+                                    <span><i class="fa-solid fa-location-dot"></i> Gimnasio Principal</span>
+                                </p>
+                            </div>
+                        </div>
+                        <span class="badge-estado completo"><i class="fa-solid fa-circle-check"></i> Completo</span>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+</body>
+</html>

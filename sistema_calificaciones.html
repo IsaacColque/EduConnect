@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/principalalumno.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="icon" type="image/png" href="imagenes/icono4.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Panel del Alumno - Calificaciones</title>
+    
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- SIDEBAR INTEGRADO DIRECTAMENTE CON "INICIO" ACTIVO -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="/imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="Logo de EduConnect">
+            </div>
+            
+            <ul class="menu">
+                <li >
+                    <a href="interfaz_menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li> 
+                    <a href="mis_cursos.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Cursos</span>
+                    </a>
+                </li>
+                <li class="activo">
+                    <a href="sistema_calificaciones.html">
+                        <i class="fa-regular fa-clipboard"></i>
+                        <span>Calificaciones</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li> 
+                    <a href="eventos.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="perfil.html">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="configuracion.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="salir">
+                <a href="iniciar_sesion.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+        <div class="main-content">
+            
+            <div class="top-navbar">
+                <!-- Botón hamburguesa con su ID para el script -->
+                <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars"></i>
+                </button>
+                
+                <div class="user-profile-top">
+                    <div class="user-info-text">
+                        <span class="user-name">Isaac Colque</span>
+                        <span class="user-role">Estudiante</span>
+                    </div>
+                    <div class="avatar-container">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </div>
+                </div>
+            </div>
+
+            <main class="page-body">
+                <h1 class="title">Mi rendimiento académico</h1>
+                
+                <div class="panel-calificaciones-container">
+                    <div class="panel-header-inline">
+                        <h2>Panel de Calificaciones - <span id="periodo-texto">Primer Semestre 2024</span></h2>
+                        <div class="select-wrapper">
+                            <select name="periodo" id="periodo-select" class="custom-select">
+                                <option value="1sem2024">Primer Semestre 2024</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down select-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="promedio-graphic-box">
+                        <div class="promedio-text-side">
+                            <h3>Promedio<br>General</h3>
+                        </div>
+                        <div class="gauge-wrapper">
+                            <div class="gauge-body">
+                                <svg viewBox="0 0 100 50" class="gauge-svg">
+                                    <path class="gauge-bg" d="M 10,50 A 40,40 0 0,1 90,50" />
+                                    <path class="gauge-fill" d="M 10,50 A 40,40 0 0,1 90,50" />
+                                </svg>
+                                <div class="gauge-text-center">
+                                    <span class="gauge-number">8.5</span>
+                                    <span class="gauge-max">(out 10)</span>
+                                </div>
+                            </div>
+                            <div class="gauge-footer">Primer Semestre</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <h2>Boleta de Notas</h2>
+                    <table class="note">
+                        <thead>
+                            <tr>
+                                <th>Materia</th>
+                                <th>Tarea 1</th>
+                                <th>Examen Parcial</th>
+                                <th>Participación</th>
+                                <th>Proyecto Final</th>
+                                <th>Asistencia</th>
+                                <th>Promedio</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Matemática</td>
+                                <td>8</td>
+                                <td>9</td>
+                                <td>10</td>
+                                <td>8.5</td>
+                                <td>90%</td>
+                                <td class="grade-bold">7.5</td>
+                                <td><span class="status approved"><span class="dot green"></span>Aprobado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Física</td>
+                                <td>8</td>
+                                <td>9</td>
+                                <td>10</td>
+                                <td>8.5</td>
+                                <td>90%</td>
+                                <td class="grade-bold">7.5</td>
+                                <td><span class="status approved"><span class="dot green"></span>Aprobado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Lengua y Literatura</td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>70%</td>
+                                <td class="grade-bold">6</td>
+                                <td><span class="status approved"><span class="dot green"></span>Aprobado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Historia</td>
+                                <td>5</td>
+                                <td>5.5</td>
+                                <td>7</td>
+                                <td>6</td>
+                                <td>60%</td>
+                                <td class="grade-bold">5</td>
+                                <td><span class="status alert"><span class="dot orange"></span>En Alerta</span></td>
+                            </tr>
+                            <tr>
+                                <td>Geografía</td>
+                                <td>6</td>
+                                <td>5.5</td>
+                                <td>7</td>
+                                <td>6</td>
+                                <td>50%</td>
+                                <td class="grade-bold">5</td>
+                                <td><span class="status alert"><span class="dot orange"></span>En Alerta</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </main>
+        </div> 
+    </div> 
+
+    <!-- SCRIPT DE CARGA, BOTÓN HAMBURGUESA Y ACTIVACIÓN AUTOMÁTICA DEL BRILLO -->
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+                
+                // 1. Activar el botón hamburguesa para colapsar/expandir
+                const menuBtn = document.getElementById('menu-btn');
+                const sidebar = document.getElementById('sidebar');
+
+                if (menuBtn && sidebar) {
+                    menuBtn.addEventListener('click', () => {
+                        sidebar.classList.toggle('collapsed');
+                    });
+                }
+
+                // 2. Detectar la página actual e iluminar el menú correcto
+                const rutaActual = window.location.pathname.split("/").pop();
+                const itemsMenu = document.querySelectorAll('.menu li');
+
+                itemsMenu.forEach(li => {
+                    const link = li.querySelector('a');
+                    if (link) {
+                        const href = link.getAttribute('href');
+                        if (href === rutaActual) {
+                            document.querySelectorAll('.menu li').forEach(el => el.classList.remove('activo'));
+                            li.classList.add('activo');
+                        }
+                    }
+                });
+            });
+    </script>
+    <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+</body>
+</html>

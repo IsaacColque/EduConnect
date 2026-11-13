@@ -1,0 +1,233 @@
+
+body, html {
+    overflow-x: hidden; /* Elimina por completo cualquier barra horizontal */
+}
+
+.calendar-center-container {
+    padding: 20px 25px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.calendar-header-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header-panel h2 {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.calendar-controls .select-wrapper select {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #374151;
+    cursor: pointer;
+    outline: none;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.search-input-wrapper .search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+.search-input-wrapper input {
+    width: 100%;
+    padding: 11px 15px 11px 45px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    outline: none;
+    background: #ffffff;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input-wrapper input:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.12);
+}
+
+.calendar-grid-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Días de la semana */
+.weekdays-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #6b7280;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f4f6;
+    margin-bottom: 8px;
+}
+
+/* Celdas de los días con minmax(0, 1fr) para forzar ajuste limpio */
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+}
+
+.day-cell {
+    background-color: #f9fafb;
+    border: 1px solid #f3f4f6;
+    border-radius: 8px;
+    min-height: 85px;
+    padding: 6px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Evita que el texto sobresalga de la celda */
+}
+
+.day-cell:hover {
+    background-color: #f3f4f6;
+}
+
+.day-cell.day-prev, 
+.day-cell.day-next {
+    background-color: #ffffff;
+    color: #9ca3af;
+    opacity: 0.5;
+}
+
+.day-number {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.event-bar {
+    margin-top: 4px;
+    padding: 3px 6px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%; /* Ocupa exactamente el ancho de su celda sin romper nada */
+    box-sizing: border-box;
+}
+
+.event-blue {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    border-left: 3px solid #0284c7;
+}
+
+.event-darkblue {
+    background-color: #dbeafe;
+    color: #1e40af;
+    border-left: 3px solid #2563eb;
+}
+
+.event-indigo {
+    background-color: #e0e7ff;
+    color: #3730a3;
+    border-left: 3px solid #4f46e5;
+}
+
+.lista-eventos-inferior {
+    margin-top: 15px;
+}
+
+.tarjeta-actividad-detalle {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.actividad-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icono-destacado {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.bg-light-blue {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+}
+
+.actividad-cuerpo h3 {
+    font-size: 0.95rem;
+    color: #1f2937;
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.actividad-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.78rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.actividad-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.badge-estado {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge-estado.completo {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+}

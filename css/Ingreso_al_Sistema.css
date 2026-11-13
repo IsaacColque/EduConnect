@@ -1,0 +1,130 @@
+/* ===== EduConnect - Pantalla de inicio ===== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    font-family: 'Segoe UI', sans-serif;
+    background: url("../imagenes/Centro Educativo Nonogasta.png") center/cover no-repeat fixed;
+    position: relative;
+}
+
+/* Oscurece la foto de atrás para que el texto resalte */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(2, 20, 60, 0.75), rgba(10, 71, 184, 0.55));
+    z-index: 0;
+}
+
+/* ===== TARJETA ===== */
+.tarjeta {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 460px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 26px;
+    padding: 46px 38px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    animation: subir 0.7s ease-out;
+}
+
+@keyframes subir {
+    from { opacity: 0; transform: translateY(35px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== LOGO ===== */
+.logo {
+    width: min(280px, 100%);
+    margin: 0 auto 22px;
+}
+
+/* ===== TÍTULO ===== */
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.45;
+    color: #0f2f6b;
+}
+
+h1 span {
+    background: linear-gradient(90deg, #0A47B8, #16a34a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+}
+
+/* ===== PUNTOS ===== */
+.puntos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 26px 0 30px;
+}
+
+.puntos span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #eef4ff;
+    color: #0A47B8;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 7px 15px;
+    border-radius: 999px;
+    border: 1px solid #d6e4ff;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.puntos span:hover {
+    transform: translateY(-3px);
+    background: #dce9ff;
+}
+
+/* ===== BOTÓN ===== */
+.btn-ingresar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #0A47B8, #002B85);
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(10, 71, 184, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-ingresar i { transition: transform 0.2s; }
+
+.btn-ingresar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 32px rgba(10, 71, 184, 0.45);
+}
+
+.btn-ingresar:hover i { transform: translateX(5px); }
+
+.btn-ingresar:active { transform: translateY(0); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+    .tarjeta { padding: 34px 24px; border-radius: 20px; }
+    h1 { font-size: 1.4rem; }
+}

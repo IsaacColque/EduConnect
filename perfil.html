@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Mi perfil</title>
+    <link rel="icon" type="image/png" href="imagenes/icono4.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/perfil_configuracion.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- SIDEBAR INTEGRADO DIRECTAMENTE -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="Logo de EduConnect">
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="Interfaz_Menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mis_cursos.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Cursos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="sistema_calificaciones.html">
+                        <i class="fa-regular fa-clipboard"></i>
+                        <span>Calificaciones</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="eventos.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li class="activo">
+                    <a href="perfil.html" aria-current="page">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="configuracion.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="salir">
+                <a href="index.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="main-content">
+            <header class="top-bar">
+                <div class="navbar-left">
+                    <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+
+                <div class="navbar-right">
+                    <div class="user-profile-top">
+                        <div class="user-info-text">
+                            <span class="user-name">¡Hola, Isaac Colque!</span>
+                            <span class="user-role">Estudiante</span>
+                        </div>
+                        <div class="avatar-container" aria-hidden="true">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="page-body">
+                <div class="profile-content">
+                    <div class="profile-heading">
+                        <h1>Mi perfil</h1>
+                    </div>
+
+                    <section class="profile-overview" aria-labelledby="profile-name">
+                        <div class="profile-avatar" aria-hidden="true">IC</div>
+                        <div class="profile-identity">
+                            <h2 id="profile-name">Isaac Colque</h2>
+                            <p>isaccolque37@gmail.com</p>
+                            <span class="profile-role">
+                                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                                Estudiante
+                            </span>
+                        </div>
+
+                        <span class="example-label">Valores de ejemplo</span>
+
+                        <div class="student-metrics">
+                            <div class="metric">
+                                <span class="metric-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span>
+                                <div>
+                                    <span class="metric-label">Promedio general</span>
+                                    <strong class="metric-value">8,7 / 10</strong>
+                                    <span class="metric-note">Ciclo actual</span>
+                                </div>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i></span>
+                                <div>
+                                    <span class="metric-label">Asistencia general</span>
+                                    <strong class="metric-value">94%</strong>
+                                    <span class="metric-note">Ciclo actual</span>
+                                </div>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span>
+                                <div>
+                                    <span class="metric-label">Tareas entregadas</span>
+                                    <strong class="metric-value">18 / 20</strong>
+                                    <span class="metric-note">Este periodo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="profile-section" aria-labelledby="personal-heading">
+                        <div class="section-heading">
+                            <span class="section-icon"><i class="fa-regular fa-user" aria-hidden="true"></i></span>
+                            <div>
+                                <h2 id="personal-heading">Información personal</h2>
+                                <p>Datos asociados a tu perfil de estudiante.</p>
+                            </div>
+                        </div>
+
+                        <dl class="details-grid">
+                            <div class="detail-item">
+                                <dt class="detail-label">Nombre completo</dt>
+                                <dd class="detail-value">Isaac Colque</dd>
+                            </div>
+                            <div class="detail-item">
+                                <dt class="detail-label">Correo electrónico</dt>
+                                <dd class="detail-value">isaccolque37@gmail.com</dd>
+                            </div>
+                            <div class="detail-item">
+                                <dt class="detail-label">Teléfono</dt>
+                                <dd class="detail-value pending-value">+54 3825 410060</dd>
+                            </div>
+                            <div class="detail-item">
+                                <dt class="detail-label">Fecha de nacimiento</dt>
+                                <dd class="detail-value pending-value">24 de septiembre de 2007</dd>
+                            </div>
+                        </dl>
+                    </section>
+
+                    <footer class="profile-footer">
+                        EduConnect · Perfil del estudiante
+                    </footer>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+</body>
+</html>

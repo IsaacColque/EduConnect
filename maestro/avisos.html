@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduConnect - Avisos (Profesor)</title>
+  
+  <!-- Fuente Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Íconos FontAwesome y Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Tus estilos -->
+  <link rel="stylesheet" href="/maestro/css/sidebar.css" />
+  <link rel="stylesheet" href="/maestro/css/avisos.css" />
+</head>
+<body>
+
+  <div class="app-layout">
+   
+    <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="../imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="EduConnect Logo">
+            </div>
+
+            <ul class="menu">
+                <li> 
+                    <a href="/maestro/interfaz_menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a> 
+                </li>
+                <li>
+                    <a href="/maestro/cursos.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Asignatura</span>
+                    </a>
+                </li>
+                <li class="activo">
+                    <a href="/maestro/avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/evento.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/perfil.html">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/configuracion.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="salir">
+                <a href="../iniciar_sesion.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+        
+      <!-- NAVBAR SUPERIOR -->
+      <header class="top-navbar">
+        <div class="navbar-left">
+          <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+        <div class="navbar-right">
+          <div class="user-profile-top">
+            <div class="user-info-text">
+              <span class="user-name">Sebastian Guardia</span>
+              <span class="user-role">Profesor</span>
+            </div>
+            <div class="avatar-container" aria-hidden="true">
+              <i class="fa-solid fa-circle-user"></i>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- CUERPO DE LA PÁGINA -->
+      <main class="page-body">
+        
+        <!-- Encabezado -->
+        <header class="page-header">
+          <div>
+            <h1 class="page-title">Avisos Recientes - EduConnect</h1>
+            <p class="page-subtitle">Comunicados institucionales, notas de dirección y avisos para el cuerpo docente</p>
+          </div>
+        </header>
+
+        <!-- Tarjetas de Resumen (KPIs) -->
+        <section class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon total"><i class="bi bi-megaphone-fill"></i></div>
+            <div>
+              <span class="kpi-label">Total Comunicados</span>
+              <strong class="kpi-value" id="kpiTotal">0</strong>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon urgente"><i class="bi bi-exclamation-octagon-fill"></i></div>
+            <div>
+              <span class="kpi-label">Urgentes</span>
+              <strong class="kpi-value" id="kpiUrgente">0</strong>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon advertencia"><i class="bi bi-exclamation-triangle-fill"></i></div>
+            <div>
+              <span class="kpi-label">Advertencias</span>
+              <strong class="kpi-value" id="kpiAdvertencia">0</strong>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon general"><i class="bi bi-info-circle-fill"></i></div>
+            <div>
+              <span class="kpi-label">Informativos</span>
+              <strong class="kpi-value" id="kpiGeneral">0</strong>
+            </div>
+          </div>
+        </section>
+        <!-- Barra de Búsqueda y Filtros -->
+        <section class="toolbar-card">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" id="inputBuscarAviso" placeholder="Buscar por título, contenido o emisor..." />
+          </div>
+
+          <div class="toolbar-actions">
+            <select id="filtroEmisor" class="form-select">
+              <option value="todos">Todos los emisores</option>
+              <option value="Dirección General">Dirección General</option>
+              <option value="Secretaría Académica">Secretaría Académica</option>
+              <option value="Departamento de Preceptoría">Departamento de Preceptoría</option>
+            </select>
+
+            <select id="filtroPrioridad" class="form-select">
+              <option value="todos">Todas las prioridades</option>
+              <option value="urgente">Urgente</option>
+              <option value="advertencia">Advertencia</option>
+              <option value="general">Informativo / General</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Cuadrícula de Tarjetas de Avisos -->
+        <section class="avisos-grid" id="contenedorAvisos">
+          <!-- Cargado dinámicamente desde avisos-profesor.js -->
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal de Lectura Completa -->
+  <div id="modalLeerAviso" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span id="modalBadge" class="aviso-badge">Urgente</span>
+          <span id="modalFecha" class="aviso-fecha"><i class="bi bi-calendar3"></i> Fecha</span>
+        </div>
+        <button type="button" id="btnCerrarModal" class="btn-icon"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <h3 id="modalTitulo" class="modal-aviso-title">Título del Comunicado</h3>
+        <p id="modalEmisor" class="modal-aviso-emisor"><i class="bi bi-person-badge-fill"></i> Emisor</p>
+        <div id="modalContenido" class="modal-aviso-texto">Contenido completo...</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnEntendidoModal" class="btn btn-primary">Cerrar lectura</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="/maestro/js/avisos.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+    
+        if (menuBtn && sidebar) {
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+        }
+    </script>
+</body>
+</html>

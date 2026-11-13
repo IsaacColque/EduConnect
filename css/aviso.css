@@ -1,0 +1,275 @@
+/* --- CONTENEDOR Y DISEÑO GENERAL DE AVISOS --- */
+.page-body {
+    padding: 25px 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #f4f7fc;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;            
+    width: 100%;
+    padding: 15px 30px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0; 
+    margin-bottom: 20px;
+}
+
+.avisos-top-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.avisos-top-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* Distribución de dos columnas */
+.avisos-layout-dos-columnas {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.avisos-columna-principal {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.avisos-columna-lateral {
+    width: 320px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- TARJETAS DE AVISOS --- */
+.tarjeta-aviso-detalle {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.advertencia-borde {
+    border-left: 5px solid #ea1708;
+}
+
+.aviso-header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aviso-header-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+/* Badges de etiquetas */
+.badge-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+.tag-advertencia {
+    background-color: #ff0202;
+    color: #fbfaf9;
+}
+
+.tag-general {
+    background-color: #007bf5;
+    color: #f9f9f9;
+    border: 1px solid #cbd5e1;
+}
+
+.aviso-submeta span {
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sub-advertencia { color: #dc2626; }
+.sub-general { color: #0626d9; }
+.sub-evento { color: #0bbf29; }
+
+.aviso-texto-desc {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.aviso-footer-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #64748b;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 10px;
+}
+
+.aviso-fecha-deadline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+/* Caja de barra de progreso en aviso urgente */
+.deadline-progress-box {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.deadline-text-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background-color: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    width: 45%;
+    height: 100%;
+    background-color: #16a34a;
+    border-radius: 3px;
+}
+
+/* --- WIDGETS LATERALES --- */
+.widget-lateral-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.widget-lateral-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.widget-lista-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.widget-lista-links li {
+    font-size: 13px;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.text-danger { color: #dc2626; }
+.text-warning { color: #facc15; }
+.text-success { color: #16a34a; }
+
+.evento-item-lat {
+    border-left: 3px solid #2563eb;
+    padding-left: 10px;
+    margin-bottom: 8px;
+}
+
+.evento-tit {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.evento-time {
+    font-size: 11px;
+    color: #64748b;
+    margin: 2px 0 0 0;
+}
+
+/* Mini Calendario Lateral */
+.calendario-card-lat {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.mes-selector-lat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.mes-actual-lat {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.calendario-tabla-lat {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 12px;
+}
+
+.calendario-tabla-lat th {
+    color: #64748b;
+    font-weight: 600;
+    padding-bottom: 8px;
+}
+
+.calendario-tabla-lat td {
+    padding: 6px 0;
+    color: #334155;
+}

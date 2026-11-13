@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduConnect - Asistencia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/png" href="../imagenes/icono4.png">
+    <link rel="stylesheet" href="/Preceptor/css/sidebar.css" />
+    <link rel="stylesheet" href="/Preceptor/css/asistencia.css" />
+</head>
+<body>
+
+  <div class="app-layout">
+   
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="logo-container">
+        <img src="../imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="EduConnect Logo">
+      </div>
+
+      <ul class="menu">
+        <li> 
+          <a href="/preceptor/interfaz_menu.html">
+            <i class="fa-solid fa-house"></i>
+            <span>Inicio</span>
+          </a> 
+        </li>
+        <!-- Se movió class="activo" aquí -->
+        <li class="activo">
+          <a href="/preceptor/Asistencia.html">
+            <i class="fa-solid fa-book"></i>
+            <span>Asistencia</span>
+          </a>
+        </li>
+        <li>
+          <a href="/preceptor/avisos.html">
+            <i class="fa-regular fa-bell"></i>
+            <span>Avisos</span>
+          </a>
+        </li>
+        <li>
+          <a href="/preceptor/evento.html">
+            <i class="fa-regular fa-calendar"></i>
+            <span>Eventos</span>
+          </a>
+        </li>
+        <li>
+          <a href="/preceptor/mensaje.html">
+            <i class="fa-regular fa-message"></i>
+            <span>Mensajes</span>
+          </a>
+        </li>
+        <li>
+          <a href="/preceptor/perfil.html">
+            <i class="fa-regular fa-user"></i>
+            <span>Perfil</span>
+          </a>
+        </li>
+        <li>
+          <a href="/preceptor/configuracion.html">
+            <i class="fa-solid fa-gear"></i>
+            <span>Configuración</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="salir">
+        <a href="../iniciar_sesion.html">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Cerrar sesión</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+        
+      <!-- NAVBAR SUPERIOR (Con tu perfil y botón hamburguesa) -->
+      <header class="top-navbar">
+        <div class="navbar-left">
+          <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+        <div class="navbar-right">
+          <div class="user-profile-top">
+            <div class="user-info-text">
+              <span class="user-name">Sebastian Guardia</span>
+              <span class="user-role">Preceptor</span>
+            </div>
+            <div class="avatar-container" aria-hidden="true">
+              <i class="fa-solid fa-circle-user"></i>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- CUERPO DE LA PÁGINA DE ASISTENCIA -->
+      <main class="page-body">
+        
+        <!-- Encabezado y selectores -->
+        <header class="page-header">
+          <div>
+            <h1 class="page-title">Control de Asistencia - EduConnect</h1>
+            <p class="page-subtitle">Registro diario de presentismo, tardanzas y justificaciones por curso</p>
+          </div>
+
+          <div class="header-controls">
+            <div class="control-group">
+              <label for="selectCurso"><i class="bi bi-mortarboard"></i> Curso</label>
+              <select id="selectCurso" class="form-select">
+                <option value="5A">5° Año "A" - Turno Mañana</option>
+                <option value="5B">5° Año "B" - Turno Mañana</option>
+                <option value="4A">4° Año "A" - Turno Tarde</option>
+                <option value="3C">3° Año "C" - Turno Mañana</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <label for="inputFecha"><i class="bi bi-calendar3"></i> Fecha</label>
+              <input type="date" id="inputFecha" class="form-input" value="2026-11-13" />
+            </div>
+          </div>
+        </header>
+
+        <!-- Tarjetas de resumen (KPIs) -->
+        <section class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon total"><i class="bi bi-people-fill"></i></div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Alumnos</span>
+              <strong class="kpi-value" id="kpiTotal">0</strong>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon presente"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="kpi-info">
+              <span class="kpi-label">Presentes</span>
+              <strong class="kpi-value" id="kpiPresentes">0</strong>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon ausente"><i class="bi bi-x-circle-fill"></i></div>
+            <div class="kpi-info">
+              <span class="kpi-label">Ausentes</span>
+              <strong class="kpi-value" id="kpiAusentes">0</strong>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon tardanza"><i class="bi bi-clock-fill"></i></div>
+            <div class="kpi-info">
+              <span class="kpi-label">Tardanzas / Justif.</span>
+              <strong class="kpi-value" id="kpiOtros">0</strong>
+            </div>
+          </div>
+        </section>
+
+        <!-- Barra de búsqueda y acciones rápidas -->
+        <section class="toolbar-card">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" id="inputBuscar" placeholder="Buscar alumno por apellido, nombre o DNI..." />
+          </div>
+
+          <div class="toolbar-actions">
+            <select id="filtroEstado" class="form-select sm">
+              <option value="todos">Todos los estados</option>
+              <option value="presente">Solo Presentes</option>
+              <option value="ausente">Solo Ausentes</option>
+              <option value="tardanza">Solo Tardanzas</option>
+              <option value="justificado">Solo Justificados</option>
+            </select>
+
+            <button type="button" id="btnTodosPresentes" class="btn btn-outline">
+              <i class="bi bi-check2-all"></i> Marcar todos Presentes
+            </button>
+
+            <button type="button" id="btnExportar" class="btn btn-outline">
+              <i class="bi bi-download"></i> Exportar CSV
+            </button>
+          </div>
+        </section>
+
+        <!-- Tabla de alumnos -->
+        <section class="table-card">
+          <div class="table-responsive">
+            <table class="attendance-table">
+              <thead>
+                <tr>
+                  <th>Legajo / DNI</th>
+                  <th>Alumno</th>
+                  <th>% Asist. Anual</th>
+                  <th>Estado de Hoy</th>
+                  <th>Observación / Motivo</th>
+                  <th class="text-right">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaAlumnosBody">
+                <!-- Se rellena dinámicamente desde asistencia.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span id="textoResumenRegistro" class="footer-note">Mostrando alumnos del curso</span>
+            <button type="button" id="btnGuardarAsistencia" class="btn btn-primary">
+              <i class="bi bi-save"></i> Guardar Parte Diario
+            </button>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal para Justificar o Agregar Observación -->
+  <div id="modalObservacion" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Detalle / Justificación de Asistencia</h3>
+        <button type="button" id="btnCerrarModal" class="btn-icon"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-student-name" id="modalAlumnoNombre">Alumno</p>
+        
+        <label class="form-label">Estado</label>
+        <select id="modalEstadoSelect" class="form-select full">
+          <option value="presente">Presente</option>
+          <option value="ausente">Ausente Injustificado</option>
+          <option value="tardanza">Tardanza (1/2 falta)</option>
+          <option value="justificado">Ausente Justificado</option>
+        </select>
+
+        <label class="form-label mt-3">Motivo / Certificado / Aviso a familia</label>
+        <textarea id="modalMotivoInput" rows="3" class="form-textarea" placeholder="Ej: Presentó certificado médico, retiro anticipado autorizado..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCancelarModal" class="btn btn-outline">Cancelar</button>
+        <button type="button" id="btnGuardarModal" class="btn btn-primary">Aplicar cambios</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificación Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Scripts (Ajustá la ruta de tu sidebar.js si tenés uno para el botón hamburguesa) -->
+  <!-- <script src="/Preceptor/js/sidebar.js"></script> -->
+  <script src="/Preceptor/js/asistencia.js"></script>
+  <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+</body>
+</html>

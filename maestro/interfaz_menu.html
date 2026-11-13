@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Inicio</title>
+
+    <!-- Linkeo de fuentes e iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="/maestro/css/sidebar.css">
+    <link rel="stylesheet" href="/maestro/css/interfaz_menu.css">
+    <link rel="icon" type="image/png" href="/imagenes/icono4.png">
+</head>
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL: Une el menú izquierdo con la zona derecha -->
+    <div class="dashboard-container">
+        
+        <!-- SIDEBAR INTEGRADO DIRECTAMENTE CON "INICIO" ACTIVO -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="../imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="Logo de EduConnect">
+            </div>
+            
+            <ul class="menu">
+                <li class="activo">
+                    <a href="/maestro/interfaz_menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li> 
+                    <a href="/maestro/cursos.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Asignatura</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/maestro/avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li> 
+                    <a href="/maestro/evento.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/perfil.html">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/maestro/configuracion.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="salir">
+                <a href="../../iniciar_sesion.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- LADO DERECHO: TODO EL CONTENIDO PRINCIPAL -->
+        <div class="main-content">
+            
+            <!-- BARRA SUPERIOR (NAVBAR) -->
+            <header class="top-navbar">
+                <div class="navbar-left">
+                    <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+
+                <div class="navbar-right">
+                    <div class="user-profile-top">
+                        <div class="user-info-text">
+                            <span class="user-name">¡Hola, Sebastian Guardia!</span>
+                            <span class="user-role">Profesor</span>
+                        </div>
+                        <div class="avatar-container">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CUERPO DE LA PÁGINA: Contiene el Banner y el Calendario juntos -->
+            <div class="page-body">
+                
+                <!-- 1. FILA SUPERIOR: Banner de Bienvenida y Calendario -->
+                <div class="fila-superior">
+                    
+                    <!-- Imagen de Bienvenida -->
+                    <img src="../imagenes/Estilos3/Bienvenida.png" class="logo3" alt="Bienvenida">
+
+                    <!-- Calendario Chiquito alineado al lado -->
+                    <div class="calendario-card">
+                        <div class="calendario-header">
+                            <i class="fa-regular fa-calendar-days icon-cal"></i>
+                            <h3>Calendario</h3>
+                        </div>
+                        
+                        <div class="mes-selector">
+                            <button class="nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                            <span class="mes-actual">JUNIO 2026</span>
+                            <button class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+
+                        <table class="calendario-tabla">
+                            <thead>
+                                <tr>
+                                    <th>Lun</th>
+                                    <th>Mar</th>
+                                    <th>Mié</th>
+                                    <th>Jue</th>
+                                    <th>Vie</th>
+                                    <th>Sáb</th>
+                                    <th>Dom</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="dia-opaco">29</td>
+                                    <td class="dia-opaco">30</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                    <td>9</td>
+                                    <td>10</td>
+                                    <td>11</td>
+                                    <td class="dia-activo">12</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>14</td>
+                                    <td>15</td>
+                                    <td>16</td>
+                                    <td>17</td>
+                                    <td>18</td>
+                                    <td>19</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>21</td>
+                                    <td>22</td>
+                                    <td>23</td>
+                                    <td>24</td>
+                                    <td>25</td>
+                                    <td>26</td>
+                                </tr>
+                                <tr>
+                                    <td>27</td>
+                                    <td>28</td>
+                                    <td>29</td>
+                                    <td>30</td>
+                                    <td>31</td>
+                                    <td class="dia-opaco">1</td>
+                                    <td class="dia-opaco">2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div> <!-- Cierre de fila-superior -->
+
+                <!-- 2. FILA INFERIOR: Accesos, Perfil y Avisos -->
+                <div class="fila-inferior">
+                    
+                    <!-- COLUMNA IZQUIERDA: Accesos Rápidos + Datos del Estudiante -->
+                    <div class="columna-izquierda">
+                        
+                        <!-- Bloque de Accesos Rápidos -->
+                        <div class="seccion-bloque">
+                            <h3 class="seccion-titulo">Acceso rápido</h3>
+                            <div class="grid-accesos">
+                                <a href="/maestro/cursos.html" class="tarjeta-acceso">
+                                    <div class="circulo-icono azul-claro"><i class="fa-solid fa-book"></i></div>
+                                    <h4>Asignatura</h4>
+                                    <p>Mira tu materia a enseñar.</p>
+                                </a>
+                                <a href="/maestro/evento.html" class="tarjeta-acceso">
+                                    <div class="circulo-icono verde"><i class="fa-regular fa-calendar"></i></div>
+                                    <h4>Eventos</h4>
+                                    <p>Entérate de actividades y fechas importantes.</p>
+                                </a>
+                                <a href="/maestro/avisos.html" class="tarjeta-acceso">
+                                    <div class="circulo-icono naranja"><i class="fa-regular fa-bell"></i></div>
+                                    <h4>Avisos</h4>
+                                    <p>Notificaciones importantes y comunicados.</p>
+                                </a>
+                                <a href="/maestro/mensaje.html" class="tarjeta-acceso">
+                                    <div class="circulo-icono azul-oscuro"><i class="fa-regular fa-message"></i></div>
+                                    <h4>Mensajes</h4>
+                                    <p>Comunicación directa con docentes.</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Bloque de Información del Estudiante -->
+                        <div class="seccion-bloque perfil-estudiante">
+                            <div class="perfil-header">
+                                <i class="fa-regular fa-user icon-perfil-tit"></i>
+                                <h3 class="seccion-titulo">Información del estudiante</h3>
+                            </div>
+                            <div class="perfil-contenido">
+                                <div class="avatar-estudiante">
+                                    <i class="fa-solid fa-circle-user" style="font-size: 55px; color: #0A47B8;"></i>
+                                </div>
+                                <div class="datos-grid">
+                                    <div class="dato-item">
+                                        <span class="dato-etiqueta">Nombre:</span>
+                                        <span class="dato-valor">Isaac Colque</span>
+                                    </div>
+                                    <div class="dato-item">
+                                        <span class="dato-etiqueta">Correo:</span>
+                                        <span class="dato-valor">isaccolque37@gmail.com</span>
+                                    </div>
+                                    <div class="dato-item">
+                                        <span class="dato-etiqueta">Curso:</span>
+                                        <span class="dato-valor">5° Año - 1 Division</span>
+                                    </div>
+                                    <div class="dato-item">
+                                        <span class="dato-etiqueta">ID Estudiante:</span>
+                                        <span class="dato-valor">EC2026001</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- Fin columna-izquierda -->
+
+                    <!-- COLUMNA DERECHA: Avisos Recientes + Mini Banner corporativo -->
+                    <div class="columna-derecha">
+                        
+                        <!-- Bloque Avisos Recientes -->
+                        <div class="seccion-bloque avisos-bloque">
+                            <div class="avisos-header">
+                                <div class="avisos-titulo-izq">
+                                    <i class="fa-solid fa-bell icon-aviso-tit"></i>
+                                    <h3>Avisos recientes</h3>
+                                </div>
+                                <a href="/maestro/avisos.html" class="link-ver-todos">Ver todos</a>
+                            </div>
+                            <ul class="lista-avisos">
+                                <li>
+                                    <span class="punto-color p-verde"></span>
+                                    <div class="aviso-txt">
+                                        <h4>Reunión de padres de familia</h4>
+                                        <p>Viernes 17 de mayo - 5:00 pm</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="punto-color p-azul"></span>
+                                    <div class="aviso-txt">
+                                        <h4>Entrega de proyectos</h4>
+                                        <p>Lunes 20 de mayo</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="punto-color p-naranja"></span>
+                                    <div class="aviso-txt">
+                                        <h4>Suspensión de clases</h4>
+                                        <p>Viernes 24 de mayo</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Mini Banner Inferior -->
+                        <div class="mini-banner-edu">
+                            <div class="mb-logo">
+                                <i class="fa-solid fa-user-group"></i>
+                                <span>EduConnect</span>
+                            </div>
+                            <p class="mb-sub">APLICACIÓN ESCOLAR</p>
+                            <p class="mb-footer">Conectamos tu escuela, tu información y tu futuro.</p>
+                        </div>
+
+                    </div> <!-- Fin columna-derecha -->
+
+                </div> <!-- Fin fila-inferior -->
+
+            </div> <!-- Cierre de page-body -->
+        
+        </div> <!-- Cierre de main-content -->
+    </div> <!-- Cierre de dashboard-container -->
+
+    <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+
+</body>
+</html>

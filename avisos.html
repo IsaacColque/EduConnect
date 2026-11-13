@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Avisos</title>
+    <link rel="icon" type="image/png" href="imagenes/icono4.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/aviso.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="EduConnect Logo">
+            </div>
+
+            <ul class="menu">
+                <li> 
+                    <a href="Interfaz_Menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a> 
+                </li>
+                <li>
+                    <a href="mis_cursos.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Cursos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="sistema_calificaciones.html">
+                        <i class="fa-regular fa-clipboard"></i>
+                        <span>Calificaciones</span> 
+                    </a>
+                </li>
+                <li class="activo">
+                    <a href="avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="eventos.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="perfil.html">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="configuracion.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="salir">
+                <a href="iniciar_sesion.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="main-content">
+            
+            <!-- NAVBAR -->
+            <header class="top-bar">
+                <div class="navbar-left">
+                    <button class="hamburger-btn" id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+                </div>
+                <div class="navbar-right">
+                    <div class="user-profile-top">
+                        <div class="user-info-text">
+                            <span class="user-name"> Isaac Colque </span>
+                            <span class="user-role">Estudiante</span>
+                        </div>
+                        <div class="avatar-container"><i class="fa-solid fa-circle-user"></i></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CUERPO DE LA PÁGINA -->
+            <div class="page-body">
+                
+                <!-- TÍTULO Y SELECTOR SUPERIOR -->
+                <div class="avisos-top-header">
+                    <h2>Avisos Recientes - EduConnect</h2>
+                    <div class="select-wrapper">
+                        <select>
+                            <option>Últimos 30 Días</option>
+                            <option>Últimos 7 Días</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ESTRUCTURA DE DOS COLUMNAS -->
+                <div class="avisos-layout-dos-columnas">
+                    
+                    <!-- COLUMNA IZQUIERDA: TARJETAS DE AVISOS -->
+                    <div class="avisos-columna-principal">
+                        
+                        <!-- Tarjeta 1: Urgente -->
+                        <div class="tarjeta-aviso-detalle advertencia-borde">
+                            <div class="aviso-header-card">
+                                <h3>Entrega de Proyecto Final de Matemáticas</h3>
+                                <span class="badge-tag tag-advertencia">ADVERTENCIA</span>
+                            </div>
+                            <div class="aviso-submeta">
+                                <span class="sub-advertencia">
+                                    <i class="fa-solid fa-circle-exclamation"></i> 
+                                    Advertencia</span>
+                            </div>
+                            <p class="aviso-texto-desc">Entrega de Proyecto Final de Matemáticas. Esto impactará una entrega de Reporte de Calificaciones - Fin de Semestre.</p>
+                            
+                            <div class="aviso-footer-card">
+                                <span class="aviso-autor"><i class="fa-regular fa-user"></i> Estudiante: Isaac Colque</span>
+                                <div class="aviso-fecha-deadline">
+                                    <span><i class="fa-regular fa-calendar"></i> 25 Mayo, 2026</span>
+                                </div>
+                            </div>
+                            <div class="deadline-progress-box">
+                                <div class="deadline-text-info">
+                                    <span>tiempo restante</span>
+                                    <span>progreso: tiempo para que termine</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 2: General -->
+                        <div class="tarjeta-aviso-detalle">
+                            <div class="aviso-header-card">
+                                <h3>Recordatorio de Suspensión de Clases</h3>
+                                <span class="badge-tag tag-general">Aviso General</span>
+                            </div>
+                            <div class="aviso-submeta">
+                                <span class="sub-general"><i class="fa-solid fa-bullhorn"></i> General</span>
+                            </div>
+                            <p class="aviso-texto-desc">Recordatorio de Suspensión de Clases. El viernes 24 mayo no habrá clases por motivos de actualización del sistema escolar.</p>
+                            <div class="aviso-footer-card">
+                                <span></span>
+                                <div class="aviso-fecha-deadline">
+                                    <span><i class="fa-regular fa-calendar"></i> 24 Mayo, 2026</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3: Evento -->
+                        <div class="tarjeta-aviso-detalle">
+                            <div class="aviso-header-card">
+                                <h3>Invitación a la Feria Escolar de Ciencias</h3>
+                            </div>
+                            <div class="aviso-submeta">
+                                <span class="sub-evento"><i class="fa-regular fa-calendar-days"></i> Evento</span>
+                            </div>
+                            <p class="aviso-texto-desc">Invitación a la Feria Escolar de Ciencias, toda nuestra comunidad de estudiantes está cordialmente invitada. Estudiante: Isaac Fecha 1 Ciencias.</p>
+                            <div class="aviso-footer-card">
+                                <span></span>
+                                <div class="aviso-fecha-deadline">
+                                    <span><i class="fa-regular fa-calendar"></i> 1 Junio, 2026</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- COLUMNA DERECHA: WIDGETS LATERALES -->
+                    <div class="avisos-columna-lateral">
+                        
+                        <!-- Widget Urgentes -->
+                        <div class="widget-lateral-card">
+                            <h4><i class="fa-solid fa-triangle-exclamation text-danger"></i> Advertencia</h4>
+                            <ul class="widget-lista-links">
+                                <li><i class="fa-solid fa-circle-exclamation text-warning"> </i> Urgente</li>
+                                <li><i class="fa-solid fa-circle-exclamation text-success"></i> A Tiempo</li>
+                            </ul>
+                        </div>
+
+                        <!-- Widget Próximos Eventos -->
+                        <div class="widget-lateral-card">
+                            <h4>Próximos Eventos</h4>
+                            <div class="evento-item-lat">
+                                <p class="evento-tit">Feria de Ciencias - 1 de Junio</p>
+                                <p class="evento-time">00:00:33 h mino</p>
+                            </div>
+                            <div class="evento-item-lat">
+                                <p class="evento-tit">Reunión de Padres - 10 de Junio (addado para context).</p>
+                            </div>
+                        </div>
+
+                        <!-- Widget Mini Calendario -->
+                        <div class="calendario-card-lat">
+                            <div class="mes-selector-lat">
+                                <button class="nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                                <span class="mes-actual-lat">12 Noviembre 2026</span>
+                                <button class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                            <table class="calendario-tabla-lat">
+                                <thead>
+                                    <tr>
+                                        <th>Lu</th><th>Mo</th><th>Mi</th><th>Ju</th><th>Vr</th><th>Sa</th><th>Sa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+</body>
+</html>

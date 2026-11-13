@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduConnect - Gestión de Avisos</title>
+  
+  <!-- Fuente Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Íconos FontAwesome y Bootstrap Icons -->
+  <link rel="icon" type="image/png" href="../imagenes/icono4.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Tus estilos -->
+  <link rel="stylesheet" href="/Preceptor/css/sidebar.css" />
+  <link rel="stylesheet" href="/Preceptor/css/avisos.css" />
+</head>
+<body>
+
+  <div class="app-layout">
+   
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="logo-container">
+        <img src="../imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="EduConnect Logo">
+      </div>
+
+      <ul class="menu">
+        <li> 
+          <a href="/preceptor/interfaz_menu.html">
+            <i class="fa-solid fa-house"></i>
+            <span>Inicio</span>
+          </a> 
+        </li>
+        <li>
+          <a href="/preceptor/Asistencia.html">
+            <i class="fa-solid fa-book"></i>
+            <span>Asistencia</span>
+          </a>
+        </li>
+        <li class="activo">
+          <a href="/preceptor/avisos.html">
+            <i class="fa-regular fa-bell"></i>
+            <span>Avisos</span>
+          </a>
+        </li>
+        <li>
+          <a href="/preceptor/evento.html">
+            <i class="fa-regular fa-calendar"></i>
+            <span>Eventos</span>
+          </a>
+        </li>
+        <li>
+          <a href="/preceptor/mensaje.html">
+            <i class="fa-regular fa-message"></i>
+            <span>Mensajes</span>
+          </a>
+        </li>
+        <li>
+          <a href="/preceptor/perfil.html">
+            <i class="fa-regular fa-user"></i>
+            <span>Perfil</span>
+          </a>
+        </li>
+        <li>
+          <a href="/preceptor/configuracion.html">
+            <i class="fa-solid fa-gear"></i>
+            <span>Configuración</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="salir">
+        <a href="../iniciar_sesion.html">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Cerrar sesión</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+        
+      <!-- NAVBAR SUPERIOR -->
+      <header class="top-navbar">
+        <div class="navbar-left">
+          <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+        <div class="navbar-right">
+          <div class="user-profile-top">
+            <div class="user-info-text">
+              <span class="user-name">Sebastian Guardia</span>
+              <span class="user-role">Preceptor</span>
+            </div>
+            <div class="avatar-container" aria-hidden="true">
+              <i class="fa-solid fa-circle-user"></i>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- CUERPO DE LA PÁGINA -->
+      <main class="page-body">
+        
+        <!-- Encabezado y botón principal -->
+        <header class="page-header">
+          <div>
+            <h1 class="page-title">Panel de Avisos y Comunicados</h1>
+            <p class="page-subtitle">Emisión, seguimiento y control de circulares para alumnos, cursos y familias</p>
+          </div>
+
+          <button type="button" id="btnNuevoAviso" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Publicar Nuevo Aviso
+          </button>
+        </header>
+
+        <!-- Tarjetas de Resumen (KPIs) -->
+        <section class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon total"><i class="bi bi-megaphone-fill"></i></div>
+            <div>
+              <span class="kpi-label">Total Comunicados</span>
+              <strong class="kpi-value" id="kpiTotal">0</strong>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon urgente"><i class="bi bi-exclamation-octagon-fill"></i></div>
+            <div>
+              <span class="kpi-label">Urgentes</span>
+              <strong class="kpi-value" id="kpiUrgente">0</strong>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon advertencia"><i class="bi bi-exclamation-triangle-fill"></i></div>
+            <div>
+              <span class="kpi-label">Advertencias</span>
+              <strong class="kpi-value" id="kpiAdvertencia">0</strong>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon general"><i class="bi bi-info-circle-fill"></i></div>
+            <div>
+              <span class="kpi-label">Informativos</span>
+              <strong class="kpi-value" id="kpiGeneral">0</strong>
+            </div>
+          </div>
+        </section>
+
+        <!-- Barra de Búsqueda y Filtros -->
+        <section class="toolbar-card">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" id="inputBuscarAviso" placeholder="Buscar por título, contenido o destinatario..." />
+          </div>
+
+          <div class="toolbar-actions">
+            <select id="filtroCurso" class="form-select">
+              <option value="todos">Todos los destinatarios</option>
+              <option value="Toda la Institución">Toda la Institución</option>
+              <option value="5° Año 'A'">5° Año "A"</option>
+              <option value="5° Año 'B'">5° Año "B"</option>
+              <option value="4° Año 'A'">4° Año "A"</option>
+              <option value="Cuerpo Docente">Cuerpo Docente</option>
+            </select>
+
+            <select id="filtroPrioridad" class="form-select">
+              <option value="todos">Todas las prioridades</option>
+              <option value="urgente">Urgente</option>
+              <option value="advertencia">Advertencia</option>
+              <option value="general">Informativo / General</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Cuadrícula de Tarjetas de Avisos -->
+        <section class="avisos-grid" id="contenedorAvisos">
+          <!-- Se carga desde avisos.js -->
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal Publicar Nuevo Aviso -->
+  <div id="modalNuevoAviso" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Publicar Nuevo Comunicado</h3>
+        <button type="button" id="btnCerrarModal" class="btn-icon"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="formAviso">
+          <label class="form-label">Título del Comunicado</label>
+          <input type="text" id="tituloAviso" class="form-input full" placeholder="Ej: Reunión obligatoria de padres - 5° A" required />
+
+          <div class="form-row mt-3">
+            <div class="form-col">
+              <label class="form-label">Destinatario / Curso</label>
+              <select id="destinoAviso" class="form-select full">
+                <option value="Toda la Institución">Toda la Institución</option>
+                <option value="5° Año 'A'">5° Año "A"</option>
+                <option value="5° Año 'B'">5° Año "B"</option>
+                <option value="4° Año 'A'">4° Año "A"</option>
+                <option value="Cuerpo Docente">Cuerpo Docente</option>
+              </select>
+            </div>
+
+            <div class="form-col">
+              <label class="form-label">Nivel de Prioridad</label>
+              <select id="prioridadAviso" class="form-select full">
+                <option value="general">Informativo / General</option>
+                <option value="advertencia">Advertencia</option>
+                <option value="urgente">Urgente</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="form-label mt-3">Mensaje / Detalle del Aviso</label>
+          <textarea id="contenidoAviso" rows="4" class="form-textarea" placeholder="Escriba aquí el comunicado completo para alumnos o familias..." required></textarea>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCancelarModal" class="btn btn-outline">Cancelar</button>
+        <button type="button" id="btnGuardarAviso" class="btn btn-primary">Publicar Aviso</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Confirmar Eliminación -->
+  <div id="modalEliminar" class="modal-backdrop hidden">
+    <div class="modal-box modal-sm">
+      <div class="modal-header">
+        <h3>Eliminar Comunicado</h3>
+        <button type="button" id="btnCerrarEliminar" class="btn-icon"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="modal-body">
+        <p class="confirm-text">¿Estás seguro de que querés eliminar este aviso? Dejará de ser visible para los destinatarios.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCancelarEliminar" class="btn btn-outline">Cancelar</button>
+        <button type="button" id="btnConfirmarEliminar" class="btn btn-danger">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificación Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- JavaScript de Avisos -->
+  <script src="/Preceptor/js/avisos.js"></script>
+  <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+</body>
+</html>

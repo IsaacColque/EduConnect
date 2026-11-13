@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Mensajes (Preceptor)</title>
+    <!-- Iconos y Estilos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="/Preceptor/css/sidebar.css">
+    <link rel="stylesheet" href="/Preceptor/css/mensaje.css">
+    <link rel="icon" type="image/png" href="../imagenes/icono4.png">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="../imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="Logo de EduConnect">
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="/Preceptor/interfaz_menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Preceptor/asistencia.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Asistencia</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/Preceptor/avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Preceptor/evento.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li class="activo">
+                    <a href="/Preceptor/mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Preceptor/perfil.html" aria-current="page">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Preceptor/configuracion.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="salir">
+                <a href="../iniciar_sesion.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="main-content">
+            
+            <header class="top-navbar">
+                <div class="navbar-left">
+                    <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <div class="navbar-right">
+                    <div class="user-profile-top">
+                        <div class="user-info-text">
+                            <span class="user-name">¡Hola, Preceptor/a!</span>
+                            <span class="user-role">Preceptoría Turno Tarde</span>
+                        </div>
+                        <div class="avatar-container"><i class="fa-solid fa-circle-user"></i></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CUERPO DE LA PÁGINA: BANDEJA DE MENSAJES -->
+            <div class="page-body">
+                
+                <div class="chat-container">
+                    
+                    <!-- BANDEJA DE ENTRADA (IZQUIERDA) -->
+                    <div class="chat-sidebar">
+                        <div class="chat-sidebar-header">
+                            <h3>Bandeja de Preceptoría</h3>
+                            <button class="btn-nuevo-mensaje" title="Nuevo mensaje">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="lista-contactos">
+                            <!-- Chat Seleccionado (Alumno) -->
+                            <div class="contacto-item activo-chat">
+                                <i class="fa-solid fa-circle-user contacto-avatar"></i>
+                                <div class="contacto-info">
+                                    <h4>Isaac Colque (Alumno - 5° Año)</h4>
+                                    <p>Presentaré el certificado hoy...</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Chat con Profesor -->
+                            <div class="contacto-item">
+                                <i class="fa-solid fa-circle-user contacto-avatar inactivo"></i>
+                                <div class="contacto-info">
+                                    <h4>Prof. Sebastian Guardia</h4>
+                                    <p>Consulta sobre asistencia de curso</p>
+                                </div>
+                            </div>
+
+                            <!-- Chat con Tutor / Padre -->
+                            <div class="contacto-item">
+                                <i class="fa-solid fa-circle-user contacto-avatar inactivo"></i>
+                                <div class="contacto-info">
+                                    <h4>Familia Gómez (Tutor)</h4>
+                                    <p>Justificativo por motivos de salud</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VENTANA DE CHAT ACTIVO (DERECHA) -->
+                    <div class="chat-main">
+                        
+                        <div class="chat-header-main">
+                            <i class="fa-solid fa-circle-user"></i>
+                            <span>Isaac Colque - 5° Año (Gestión de Inasistencias y Constancias)</span>
+                        </div>
+
+                        <div class="chat-messages" id="chat-messages">
+                            <!-- Mensaje recibido -->
+                            <div class="mensaje mensaje-recibido">
+                                <p>Hola Preceptor/a, le escribo para avisarle que hoy no voy a poder asistir por un inconveniente médico. Mañana le traigo la constancia.</p>
+                                <span class="mensaje-hora">08:15 AM</span>
+                            </div>
+
+                            <!-- Mensaje enviado por el preceptor -->
+                            <div class="mensaje mensaje-enviado">
+                                <p>Hola Isaac. Entendido, que te mejores. Recordá presentar el certificado médico firmado apenas regreses para justificar la falta.</p>
+                                <span class="mensaje-hora">08:20 AM</span>
+                            </div>
+                        </div>
+
+                        <!-- Área de escritura de mensajes -->
+                        <div class="chat-input-area">
+                            <input type="text" id="mensaje-input" placeholder="Escribe un mensaje institucional...">
+                            <button id="enviar-btn">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/Preceptor/js/mensaje.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+</body>
+</html>

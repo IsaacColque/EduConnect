@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Configuración</title>
+    <link rel="icon" type="image/png" href="../imagenes/icono4.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="/Preceptor/css/sidebar.css">
+    <link rel="stylesheet" href="/Preceptor/css/configuracion.css">
+    <script src="js/preferencias.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- SIDEBAR INTEGRADO DIRECTAMENTE -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="../imagenes/Estilos3/LogoEduConnect.jpeg" class="logo" alt="Logo de EduConnect">
+            </div>
+            <ul class="menu">
+                <li>
+                    <a href="/Preceptor/interfaz_menu.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Preceptor/asistencia.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Asistencia</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Preceptor/avisos.html">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>Avisos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Preceptor/evento.html">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Preceptor/mensaje.html">
+                        <i class="fa-regular fa-message"></i>
+                        <span>Mensajes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Preceptor/perfil.html">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li class="activo">
+                    <a href="/Preceptor/configuracion.html" aria-current="page">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="salir">
+                <a href="../iniciar_sesion.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="main-content">
+            <header class="top-bar">
+                <div class="navbar-left">
+                    <button class="hamburger-btn" id="menu-btn" type="button" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <div class="navbar-right">
+                    <div class="user-profile-top">
+                        <div class="user-info-text">
+                            <span class="user-name">Sebastian Guardia</span>
+                            <span class="user-role">Profesor</span>
+                        </div>
+                        <div class="avatar-container" aria-hidden="true">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="page-body">
+                <div class="profile-content">
+                    <div class="profile-heading">
+                        <h1>Configuración</h1>
+                        <p>Administrá tu cuenta y tus preferencias.</p>
+                    </div>
+
+                    <section class="profile-section" aria-labelledby="pass-heading">
+                        <div class="section-heading">
+                            <span class="section-icon"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>
+                            <div>
+                                <h2 id="pass-heading">Seguridad</h2>
+                                <p>Cambiá tu contraseña de acceso.</p>
+                            </div>
+                        </div>
+                        <form id="form-password" class="settings-form" novalidate>
+                            <div class="field">
+                                <label for="actual">Contraseña actual</label>
+                                <input type="password" id="actual" name="actual" autocomplete="current-password">
+                            </div>
+                            <div class="field">
+                                <label for="nueva">Nueva contraseña</label>
+                                <input type="password" id="nueva" name="nueva" autocomplete="new-password">
+                            </div>
+                            <div class="field">
+                                <label for="repetir">Repetir nueva contraseña</label>
+                                <input type="password" id="repetir" name="repetir" autocomplete="new-password">
+                            </div>
+                            <p id="password-msg" class="form-msg" role="status"></p>
+                            <button type="submit" class="btn-primary">Guardar contraseña</button>
+                        </form>
+                    </section>
+
+                    <footer class="profile-footer">EduConnect · Configuración</footer>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    </script>
+    <script src="js/configuracion.js"></script>
+</body>
+</html>
