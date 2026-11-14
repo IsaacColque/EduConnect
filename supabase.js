@@ -8,8 +8,6 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // 3. Exportar o dejar disponible (en JavaScript clásico con CDN, 'supabase' ya queda global)
 console.log('Cliente de Supabase inicializado correctamente para EduConnect.');
 
-
-
 async function probarConexion() {
   const { data, error } = await supabase
     .from('roles')
@@ -22,9 +20,3 @@ async function probarConexion() {
   }
 }
 
-
-/*      <!-- Cargar la librería oficial de Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- Cargar tu archivo de configuración -->
-    <script src="supabase.js"></script>                                               */

@@ -5,6 +5,9 @@
         <title>EduConnect - Iniciar Sesión</title>
         <link rel="stylesheet" href="./css/IniciarSesion.css">
         <link rel="icon" type="image/png" href="./imagenes/icono4.png">
+
+        <!-- 1. Cargar el cliente de Supabase por CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     </head>
 
     <body>
@@ -31,29 +34,70 @@
             ¿No tienes cuenta? <a href="crear_cuenta.html" class="link">Regístrate aquí</a>
         </p>
 
-        <!-- Script de validación estricta -->
+        <!-- Script de validación y conexión con Supabase -->
         <script>
+            // Configuración de credenciales de Supabase
+            const SUPABASE_URL = 'https://zlgbnzafupigoezbcsu.supabase.co';
+            const SUPABASE_ANON_KEY = 'sb_publishable_9Slr_t--WLGY6voRBemjjw_nMIRdISo';
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
             const form = document.getElementById('formLogin');
             const emailInput = document.getElementById('email');
             const passwordInput = document.getElementById('password');
 
-            form.addEventListener('submit', function(event) {
+            form.addEventListener('submit', async function(event) {
+                // Detiene el envío clásico de inmediato para manejarlo con JavaScript
+                event.preventDefault();
+                event.stopPropagation();
+
                 // Obtenemos los valores limpiando espacios en blanco a los costados
                 const emailValue = emailInput.value.trim();
                 const passwordValue = passwordInput.value.trim();
 
                 // Verificamos si están vacíos
                 if (emailValue === '' || passwordValue === '') {
-                    // Detiene por completo el envío y la redirección
-                    event.preventDefault();
-                    event.stopPropagation();
-                    
                     alert('Acceso denegado: Por favor, completa todos los recuadros.');
                     return false;
                 }
 
-                // Si tiene datos, aquí pasará a roles.html (o se conectará a tu base de datos)
-                form.action = 'roles.html';
+                // 1. Iniciar sesión en Supabase Auth
+                const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+                    email: emailValue,
+                    password: passwordValue
+                });
+
+                if (authError) {
+                    alert('Error al iniciar sesión: ' + authError.message);
+                    return;
+                }
+
+                // 2. Consultar el rol en tu tabla 'profiles' usando el ID del usuario
+                const userId = authData.user.id;
+                const { data: profileData, error: profileError } = await supabase
+                    .from('profiles')
+                    .select('rol')
+                    .eq('id', userId)
+                    .single();
+
+                if (profileError) {
+                    console.error('Error al obtener el perfil:', profileError.message);
+                    alert('No se pudo cargar el rol del usuario desde la base de datos.');
+                    return;
+                }
+
+                const rol = profileData ? profileData.rol : null;
+                console.log("Rol detectado:", rol);
+
+                // 3. Redirección dinámica según el rol registrado en la base de datos
+                if (rol === 'estudiante' || rol === 'alumno') {
+                    window.location.href = 'Interfaz_Menu.html';
+                } else if (rol === 'profesor') {
+                    window.location.href = 'maestro/interfaz_menu.html';
+                } else if (rol === 'preceptor') {
+                    window.location.href = 'Preceptor/interfaz_menu.html';
+                } else {// Si el rol no existe o no coincide con ninguno, cerramos la sesión y bloqueamos el paso
+                    await supabase.auth.signOut();
+                    alert('Acceso denegado: Tu cuenta no tiene un rol válido asignado en el sistema.');}
             });
         </script>
 
