@@ -74,7 +74,7 @@
                 // 2. Consultar el rol en tu tabla 'profiles' usando el ID del usuario
                 const userId = authData.user.id;
                 const { data: profileData, error: profileError } = await supabase
-                    .from('profiles')
+                    .from('perfiles')
                     .select('rol')
                     .eq('id', userId)
                     .single();
