@@ -1,3 +1,8 @@
+/* Evitar que los campos se salgan del formulario */
+* {
+    box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -165,4 +170,26 @@ body {
 
 .link:hover {
   text-decoration: underline;
+}
+
+/* Campos de Año y División uno al lado del otro */
+#camposEstudiante {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+/* Cada campo ocupa la mitad */
+#camposEstudiante .group {
+    width: 50%;
+    min-width: 0;
+    flex: 1;
+}
+
+/* Ajustar los inputs */
+#camposEstudiante input {
+    width: 100%;
+    max-width: 100%;
 }

@@ -1,140 +1,286 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="css/crear_cuenta.css">
-    
+
     <title>Crear Cuenta - EduConnect</title>
     <link rel="icon" type="image/png" href="./imagenes/icono4.png">
 
-    <!-- 1. Cargar el cliente de Supabase por CDN -->
+    <!-- Cliente de Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
 
     <div class="login">
 
-        <!-- Formulario controlado por JavaScript para validar Supabase -->
         <form id="formCrearCuenta">
-            
-            <div class="group">
-                <label for="name">Nombre y Apellido</label>
-                <input type="text" id="name" name="nombre" placeholder="Nombre y Apellido" required autocomplete="off">    
+
+            <!-- Nombre y Apellido separados -->
+            <div class="fila-datos">
+
+                <div class="group">
+                    <label for="nombre">Nombre</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        placeholder="Nombre"
+                        required
+                        autocomplete="given-name">
+                </div>
+
+                <div class="group">
+                    <label for="apellido">Apellido</label>
+                    <input
+                        type="text"
+                        id="apellido"
+                        name="apellido"
+                        placeholder="Apellido"
+                        required
+                        autocomplete="family-name">
+                </div>
+
             </div>
 
+
+            <!-- Email -->
             <div class="group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="ejemplo@cen.edu.ar" required autocomplete="off">
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="ejemplo@cen.edu.ar"
+                    required
+                    autocomplete="email">
             </div>
 
+
+            <!-- Contraseña -->
             <div class="group">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="••••••" required autocomplete="new-password">       
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="••••••"
+                    required
+                    autocomplete="new-password">
             </div>
 
-            <!-- Menú desplegable de roles -->
+
+            <!-- Seleccionar Rol -->
             <div class="group">
                 <label for="role">Selecciona tu Rol</label>
+
                 <select id="role" name="rol" required>
-                    <option value="" disabled selected>-- Seleccionar Rol --</option>
+                    <option value="" disabled selected>
+                        -- Seleccionar Rol --
+                    </option>
+
                     <option value="estudiante">Estudiante</option>
                     <option value="profesor">Profesor</option>
                     <option value="preceptor">Preceptor</option>
                 </select>
             </div>
 
-            <!-- Campos adicionales para Estudiante (Ocultos por defecto, uno al lado del otro) -->
-            <div id="camposEstudiante" style="display: none; gap: 10px;">
-                <div class="group" style="flex: 1;">
+
+            <!-- Campos exclusivos para Estudiantes -->
+            <div id="camposEstudiante" style="display: none;">
+
+                <div class="group">
                     <label for="anio">Año</label>
-                    <input type="text" id="anio" name="anio" placeholder="Ej: 5°">
+                    <input 
+                        type="text"
+                        id="anio"
+                        name="anio"
+                        placeholder="Ej: 5°">
                 </div>
-                <div class="group" style="flex: 1;">
+
+                <div class="group">
                     <label for="division">División</label>
-                    <input type="text" id="division" name="division" placeholder="Ej: 1°">
+                    <input
+                        type="text"
+                        id="division"
+                        name="division"
+                        placeholder="Ej: 1°">
+                </div>
+
+            </div>
+            <!-- Campos para profesores -->
+            <div id="camposProfesor" style="display: none;">
+                <div class="group">
+                    <label for="materia">Seleccioná tu materia</label>
+                    <select id="materia" name="materia">
+                        <option value="">Elegí una materia</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="Lengua">Lengua</option>
+                        <option value="Historia">Historia</option>
+                        <option value="Geografía">Geografía</option>
+                        <option value="Biología">Biología</option>
+                        <option value="Física">Física</option>
+                        <option value="Química">Química</option>
+                        <option value="Inglés">Inglés</option>
+                        <option value="Educación Física">Educación Física</option>
+                    </select>
                 </div>
             </div>
 
-            <button type="submit" class="btn-small" id="btnRegistrar">Registrarse</button>
-            
+            <!-- Botón Registrar -->
+            <button
+                type="submit"
+                class="btn-small"
+                id="btnRegistrar">
+
+                Registrarse
+
+            </button>
+
+
+            <!-- Iniciar sesión -->
             <p class="link-text">
-                ¿Ya tienes una cuenta? <a href="iniciar_sesion.html" class="link">Inicia sesión aquí</a>
+                ¿Ya tienes una cuenta?
+
+                <a href="iniciar_sesion.html" class="link">
+                    Inicia sesión aquí
+                </a>
             </p>
-            
+
         </form>
 
     </div>
 
-    <!-- 2. Lógica de interfaz dinámica y registro en Supabase -->
-    <script>
-        // Configuración de credenciales de Supabase
-        const SUPABASE_URL = 'https://zlgbnzafupigoezbcsu.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_9Slr_t--WLGY6voRBemjjw_nMIRdISo';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+    <!-- JavaScript -->
+    <script>
+
+        // Configuración de Supabase
+        const SUPABASE_URL = 'https://zlgbnzafupigoezbcsu.supabase.co';
+
+        const SUPABASE_ANON_KEY = 'sb_publishable_9Slr_t--WLGY6voRBemjjw_nMIRdISo';
+
+        const supabase = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
+
+
+        // Obtener elementos
         const form = document.getElementById('formCrearCuenta');
+
         const roleSelect = document.getElementById('role');
+
         const camposEstudiante = document.getElementById('camposEstudiante');
+
         const anioInput = document.getElementById('anio');
+
         const divisionInput = document.getElementById('division');
 
-        // Mostrar u ocultar campos de Año y División según el rol seleccionado
+
+        // Ocultar los campos al iniciar
+        camposEstudiante.style.display = 'none';
+
+
+        // Mostrar u ocultar Año y División según el rol
         roleSelect.addEventListener('change', function() {
+
             if (this.value === 'estudiante') {
-                camposEstudiante.style.display = 'flex'; // Los muestra uno al lado del otro
+
+                // Mostrar campos
+                camposEstudiante.style.display = 'flex';
+
                 anioInput.required = true;
                 divisionInput.required = true;
+
             } else {
-                camposEstudiante.style.display = 'none'; // Los oculta
+
+                // Ocultar campos
+                camposEstudiante.style.display = 'none';
+
                 anioInput.required = false;
                 divisionInput.required = false;
+
+                // Limpiar los valores
                 anioInput.value = '';
                 divisionInput.value = '';
+
             }
+
         });
 
-        // Enviar datos a Supabase al hacer submit
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            event.stopPropagation();
 
-            const nombreCompleto = document.getElementById('name').value.trim();
+        // Registro de usuario en Supabase
+        form.addEventListener('submit', async function(event) {
+
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre').value.trim();
+
+            const apellido = document.getElementById('apellido').value.trim();
+
             const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
+
+            const password = document.getElementById('password').value;
+
             const rol = roleSelect.value;
+
             const anio = anioInput.value.trim();
+
             const division = divisionInput.value.trim();
 
-            // Separar Nombre y Apellido
-            const partesNombre = nombreCompleto.split(' ');
-            const nombre = partesNombre[0] || '';
-            const apellido = partesNombre.slice(1).join(' ') || '';
 
-            // Registrar usuario en Supabase Auth enviando también el año y división si es estudiante
+            // Registrar usuario
             const { data, error } = await supabase.auth.signUp({
+
                 email: email,
+
                 password: password,
+
                 options: {
+
                     data: {
+
                         nombre: nombre,
+
                         apellido: apellido,
+
                         rol: rol,
+
                         anio: rol === 'estudiante' ? anio : null,
+
                         division: rol === 'estudiante' ? division : null
+
                     }
+
                 }
+
             });
 
+
+            // Comprobar errores
             if (error) {
+
                 alert('Error al registrarse: ' + error.message);
+
                 return;
+
             }
 
+
+            // Registro exitoso
             alert('¡Cuenta creada con éxito! Ahora puedes iniciar sesión.');
+
             window.location.href = 'iniciar_sesion.html';
+
         });
+
     </script>
+    <script src="crear_cuenta.js"></script>
 
 </body>
 </html>
