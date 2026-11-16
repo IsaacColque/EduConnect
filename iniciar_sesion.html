@@ -1,105 +1,152 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>EduConnect - Iniciar Sesión</title>
-        <link rel="stylesheet" href="./css/IniciarSesion.css">
-        <link rel="icon" type="image/png" href="./imagenes/icono4.png">
 
-        <!-- 1. Cargar el cliente de Supabase por CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <body>
+    <title>EduConnect - Iniciar Sesión</title>
 
-        <h1>Entrar a EduConnect Tu sitio de confianza</h1>
+    <link rel="stylesheet" href="./css/IniciarSesion.css">
+    <link rel="icon" type="image/png" href="./imagenes/icono4.png">
 
-        <!-- Formulario sin action directo para controlarlo con JavaScript -->
-        <form id="formLogin">
-            
-            <section class="">
-                <label for="email">Usuario / Email</label>
-                <input type="email" id="email" name="email" placeholder="ejemplo@cen.edu.ar" required autocomplete="off">
-            </section>
-            
-            <section class="form2">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="••••••" required autocomplete="current-password">
-            </section>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
 
-            <button type="submit" id="btnLogin">Iniciar Sesion</button>
-        </form>
+<body>
 
-        <p class="link-text">
-            ¿No tienes cuenta? <a href="crear_cuenta.html" class="link">Regístrate aquí</a>
-        </p>
+    <h1>Entrar a EduConnect Tu sitio de confianza</h1>
 
-        <!-- Script de validación y conexión con Supabase -->
-        <script>
-            // Configuración de credenciales de Supabase
-            const SUPABASE_URL = 'https://zlgbnzafupigoezbcsu.supabase.co';
-            const SUPABASE_ANON_KEY = 'sb_publishable_9Slr_t--WLGY6voRBemjjw_nMIRdISo';
-            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    <form id="formLogin">
 
-            const form = document.getElementById('formLogin');
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
+        <section>
+            <label for="email">Usuario / Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="ejemplo@cen.edu.ar"
+                required
+                autocomplete="email">
+        </section>
 
-            form.addEventListener('submit', async function(event) {
-                // Detiene el envío clásico de inmediato para manejarlo con JavaScript
-                event.preventDefault();
-                event.stopPropagation();
+        <section class="form2">
+            <label for="password">Contraseña</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••"
+                required
+                autocomplete="current-password">
+        </section>
 
-                // Obtenemos los valores limpiando espacios en blanco a los costados
-                const emailValue = emailInput.value.trim();
-                const passwordValue = passwordInput.value.trim();
+        <button type="submit" id="btnLogin">
+            Iniciar Sesion
+        </button>
 
-                // Verificamos si están vacíos
-                if (emailValue === '' || passwordValue === '') {
-                    alert('Acceso denegado: Por favor, completa todos los recuadros.');
-                    return false;
-                }
+    </form>
 
-                // 1. Iniciar sesión en Supabase Auth
-                const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-                    email: emailValue,
-                    password: passwordValue
-                });
+    <p class="link-text">
+        ¿No tienes cuenta?
+        <a href="crear_cuenta.html" class="link">Regístrate aquí</a>
+    </p>
+
+    <script>
+
+        // CONFIGURACIÓN SUPABASE
+        const SUPABASE_URL = 'https://zlgbnzafupigoezbcsu.supabase.co';
+
+        const SUPABASE_ANON_KEY = 'sb_publishable_9Slr_t--WLGY6voRBemjjw_nMIRdISo';
+
+        const supabase = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
+
+        // ELEMENTOS DEL FORMULARIO
+        const form = document.getElementById('formLogin');
+        const boton = document.getElementById('btnLogin');
+
+        // INICIAR SESIÓN
+        form.addEventListener('submit', async function(event) {
+
+            event.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            boton.disabled = true;
+            boton.textContent = 'Ingresando...';
+
+            try {
+
+                // 1. AUTENTICAR USUARIO
+                const { data: authData, error: authError } =
+                    await supabase.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
 
                 if (authError) {
-                    alert('Error al iniciar sesión: ' + authError.message);
-                    return;
+                    throw new Error('Error de inicio de sesión: ' + authError.message);
                 }
 
-                // 2. Consultar el rol en tu tabla 'profiles' usando el ID del usuario
-                const userId = authData.user.id;
-                const { data: profileData, error: profileError } = await supabase
+                console.log('Usuario autenticado:', authData.user.id);
+
+                // 2. BUSCAR PERFIL
+                const { data: perfil, error: perfilError } = await supabase
                     .from('perfiles')
                     .select('rol')
-                    .eq('id', userId)
+                    .eq('id', authData.user.id)
                     .single();
 
-                if (profileError) {
-                    console.error('Error al obtener el perfil:', profileError.message);
-                    alert('No se pudo cargar el rol del usuario desde la base de datos.');
-                    return;
+                if (perfilError) {
+                    throw new Error('Error al buscar el perfil: ' + perfilError.message);
                 }
 
-                const rol = profileData ? profileData.rol : null;
-                console.log("Rol detectado:", rol);
+                console.log('Perfil encontrado:', perfil);
 
-                // 3. Redirección dinámica según el rol registrado en la base de datos
-                if (rol === 'estudiante' || rol === 'alumno') {
-                    window.location.href = 'Interfaz_Menu.html';
-                } else if (rol === 'profesor') {
-                    window.location.href = 'maestro/interfaz_menu.html';
-                } else if (rol === 'preceptor') {
-                    window.location.href = 'Preceptor/interfaz_menu.html';
-                } else {// Si el rol no existe o no coincide con ninguno, cerramos la sesión y bloqueamos el paso
-                    await supabase.auth.signOut();
-                    alert('Acceso denegado: Tu cuenta no tiene un rol válido asignado en el sistema.');}
-            });
-        </script>
+                // 3. VERIFICAR ROL Y REDIRIGIR
+                let destino = '';
 
-    </body>
+                if (perfil.rol === 'estudiante' || perfil.rol === 'alumno') {
+
+                    destino = '/Interfaz_Menu.html';
+
+                } else if (perfil.rol === 'profesor') {
+
+                    destino = '/maestro/interfaz_menu.html';
+
+                } else if (perfil.rol === 'preceptor') {
+
+                    destino = '/Preceptor/interfaz_menu.html';
+
+                } else {
+
+                    throw new Error('Tu cuenta no tiene un rol válido asignado.');
+
+                }
+
+                console.log('Destino:', destino);
+
+                // 4. REDIRECCIONAR
+                window.location.assign(destino);
+
+            } catch (error) {
+
+                console.error('ERROR:', error);
+
+                alert(error.message);
+
+                boton.disabled = false;
+                boton.textContent = 'Iniciar Sesion';
+
+            }
+
+        });
+
+    </script>
+
+</body>
 </html>
