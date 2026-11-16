@@ -83,7 +83,7 @@
 
                 // 1. AUTENTICAR USUARIO
                 const { data: authData, error: authError } =
-                    await supabase.auth.signInWithPassword({
+                    await supabaseClient.auth.signInWithPassword({
                         email: email,
                         password: password
                     });
@@ -95,7 +95,7 @@
                 console.log('Usuario autenticado:', authData.user.id);
 
                 // 2. BUSCAR PERFIL
-                const { data: perfil, error: perfilError } = await supabase
+                const { data: perfil, error: perfilError } = await supabaseClient
                     .from('perfiles')
                     .select('rol')
                     .eq('id', authData.user.id)
