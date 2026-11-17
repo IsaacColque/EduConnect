@@ -127,6 +127,10 @@
                         <option value="Química">Química</option>
                         <option value="Inglés">Inglés</option>
                         <option value="Educación Física">Educación Física</option>
+                        <option value="Psicología">Psicología</option>
+                        <option value="Práctica Profesional">Práctica Profesional</option>
+                        <option value="Programación">Programación</option>
+                        <option value="Instalación y Mantenimiento">Instalación y Mantenimiento</option>
                     </select>
                 </div>
             </div>
@@ -180,6 +184,10 @@
         const anioInput = document.getElementById('anio');
 
         const divisionInput = document.getElementById('division');
+        
+        const camposProfesor = document.getElementById('camposProfesor');
+        
+        const materiaInput = document.getElementById('materia');    
 
 
         // Ocultar los campos al iniciar
@@ -189,27 +197,37 @@
         // Mostrar u ocultar Año y División según el rol
         roleSelect.addEventListener('change', function() {
 
+            // ESTUDIANTE
             if (this.value === 'estudiante') {
 
-                // Mostrar campos
-                camposEstudiante.style.display = 'flex';
+            camposEstudiante.style.display = 'flex';
+            anioInput.required = true;
+            divisionInput.required = true;
 
-                anioInput.required = true;
-                divisionInput.required = true;
+        } else {
 
-            } else {
+            camposEstudiante.style.display = 'none';
+            anioInput.required = false;
+            divisionInput.required = false;
 
-                // Ocultar campos
-                camposEstudiante.style.display = 'none';
+            anioInput.value = '';
+            divisionInput.value = '';
 
-                anioInput.required = false;
-                divisionInput.required = false;
+        }
 
-                // Limpiar los valores
-                anioInput.value = '';
-                divisionInput.value = '';
+        // PROFESOR
+        if (this.value === 'profesor') {
 
-            }
+            camposProfesor.style.display = 'block';
+            materiaInput.required = true;
+
+        } else {
+
+            camposProfesor.style.display = 'none';
+            materiaInput.required = false;
+            materiaInput.value = '';
+
+        }
 
         });
 
@@ -284,7 +302,6 @@
         });
 
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="crear_cuenta.js"></script>
 
 </body>
