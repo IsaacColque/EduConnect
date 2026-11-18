@@ -94,8 +94,8 @@
                 <div class="navbar-right">
                     <div class="user-profile-top">
                         <div class="user-info-text">
-                            <span class="user-name">¡Hola, Isaac Colque!</span>
-                            <span class="user-role">Estudiante</span>
+                            <span class="user-name" id="user-name">Cargando...</span>
+                            <span class="user-role" id="user-role">...</span>
                         </div>
                         <div class="avatar-container">
                             <i class="fa-solid fa-circle-user"></i>
@@ -305,14 +305,71 @@
     </div> <!-- Cierre de dashboard-container -->
 
     <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        // Configura tu cliente de Supabase (asegúrate de usar tus credenciales reales)
+        const SUPABASE_URL = 'https://fudtngwtdvziowrbamyp.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_PStPebFMSazini9S3539ng_D6bT3Dj0';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.addEventListener("DOMContentLoaded", async () => {
+        const nameSpan = document.getElementById('user-name');
+        const roleSpan = document.getElementById('user-role');
+
+        // 1. Intentar leer desde localStorage (si los guardaste al iniciar sesión)
+        const nombreLocal = localStorage.getItem('usuarioNombre');
+        const rolLocal = localStorage.getItem('usuarioRol');
+
+        if (nombreLocal && rolLocal) {
+            nameSpan.textContent = `¡Hola, ${nombreLocal}!`;
+            roleSpan.textContent = rolLocal;
+            return;
+        }
+
+        // 2. Si no están en localStorage, consultar directamente a Supabase mediante la sesión activa
+        try {
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+            
+            if (session && session.user) {
+                const emailUser = session.user.email;
+                
+                // Consultamos tu tabla de perfiles (ajusta 'perfiles' al nombre real de tu tabla)
+                const { data: perfil, error } = await supabase
+                    .from('perfiles') 
+                    .select('nombre, rol')
+                    .eq('email', emailUser)
+                    .single();
+
+                if (perfil) {
+                    nameSpan.textContent = `¡Hola, ${perfil.nombre}!`;
+                    roleSpan.textContent = perfil.rol;
+                    
+                    // Opcional: guardarlo para siguientes páginas
+                    localStorage.setItem('usuarioNombre', perfil.nombre);
+                    localStorage.setItem('usuarioRol', perfil.rol);
+                } else {
+                    nameSpan.textContent = `¡Hola, ${emailUser.split('@')[0]}!`;
+                    roleSpan.textContent = "Usuario";
+                }
+            } else {
+                // Si no hay sesión, redirigir al login
+                window.location.href = 'iniciar_sesion.html';
+            }
+        } catch (err) {
+            console.error("Error al obtener los datos del usuario:", err);
+            nameSpan.textContent = "¡Hola, Usuario!";
+            roleSpan.textContent = "Invitado";
+        }
+        });
+
+        // Script del botón hamburguesa que ya tenías
         const menuBtn = document.getElementById('menu-btn');
         const sidebar = document.getElementById('sidebar');
 
         if (menuBtn && sidebar) {
-            menuBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('collapsed');
-            });
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
         }
     </script>
 
