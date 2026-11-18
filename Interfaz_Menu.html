@@ -304,74 +304,76 @@
         </div> <!-- Cierre de main-content -->
     </div> <!-- Cierre de dashboard-container -->
 
-    <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Configura tu cliente de Supabase (asegúrate de usar tus credenciales reales)
-        const SUPABASE_URL = 'https://fudtngwtdvziowrbamyp.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_PStPebFMSazini9S3539ng_D6bT3Dj0';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // CONEXIÓN CON SUPABASE
+    const SUPABASE_URL = 'https://fudtngwtdvziowrbamyp.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_PStPebFMSazini9S3539ng_D6bT3Dj0';
 
-        document.addEventListener("DOMContentLoaded", async () => {
+    const supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+    // OBTENER NOMBRE Y ROL DEL USUARIO
+    document.addEventListener("DOMContentLoaded", async () => {
+
         const nameSpan = document.getElementById('user-name');
         const roleSpan = document.getElementById('user-role');
 
-        // 1. Intentar leer desde localStorage (si los guardaste al iniciar sesión)
-        const nombreLocal = localStorage.getItem('usuarioNombre');
-        const rolLocal = localStorage.getItem('usuarioRol');
-
-        if (nombreLocal && rolLocal) {
-            nameSpan.textContent = `¡Hola, ${nombreLocal}!`;
-            roleSpan.textContent = rolLocal;
-            return;
-        }
-
-        // 2. Si no están en localStorage, consultar directamente a Supabase mediante la sesión activa
         try {
-            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-            
-            if (session && session.user) {
-                const emailUser = session.user.email;
-                
-                // Consultamos tu tabla de perfiles (ajusta 'perfiles' al nombre real de tu tabla)
-                const { data: perfil, error } = await supabase
-                    .from('perfiles') 
-                    .select('nombre, rol')
-                    .eq('email', emailUser)
+
+            // 1. COMPROBAR SESIÓN
+            const { data: { session }, error: sessionError } =
+                await supabaseClient.auth.getSession();
+
+            if (sessionError) throw sessionError;
+
+            if (!session) {
+                window.location.href = 'iniciar_sesion.html';
+                return;
+            }
+
+            // 2. BUSCAR PERFIL DEL USUARIO
+            const { data: perfil, error: perfilError } =
+                await supabaseClient
+                    .from('perfiles')
+                    .select('nombre, apellido, rol')
+                    .eq('id', session.user.id)
                     .single();
 
-                if (perfil) {
-                    nameSpan.textContent = `¡Hola, ${perfil.nombre}!`;
-                    roleSpan.textContent = perfil.rol;
-                    
-                    // Opcional: guardarlo para siguientes páginas
-                    localStorage.setItem('usuarioNombre', perfil.nombre);
-                    localStorage.setItem('usuarioRol', perfil.rol);
-                } else {
-                    nameSpan.textContent = `¡Hola, ${emailUser.split('@')[0]}!`;
-                    roleSpan.textContent = "Usuario";
-                }
-            } else {
-                // Si no hay sesión, redirigir al login
-                window.location.href = 'iniciar_sesion.html';
-            }
-        } catch (err) {
-            console.error("Error al obtener los datos del usuario:", err);
-            nameSpan.textContent = "¡Hola, Usuario!";
-            roleSpan.textContent = "Invitado";
+            if (perfilError) throw perfilError;
+
+            // 3. MOSTRAR NOMBRE Y ROL
+            const nombreCompleto =
+                `${perfil.nombre} ${perfil.apellido}`;
+
+            nameSpan.textContent = `¡Hola, ${nombreCompleto}!`;
+
+            roleSpan.textContent =
+                perfil.rol.charAt(0).toUpperCase() +
+                perfil.rol.slice(1);
+
+        } catch (error) {
+
+            console.error('Error al obtener el perfil:', error);
+
+            nameSpan.textContent = '¡Hola!';
+            roleSpan.textContent = 'No se pudo cargar el perfil';
+
         }
-        });
 
-        // Script del botón hamburguesa que ya tenías
-        const menuBtn = document.getElementById('menu-btn');
-        const sidebar = document.getElementById('sidebar');
+    });
 
-        if (menuBtn && sidebar) {
+    // BOTÓN HAMBURGUESA
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+
+    if (menuBtn && sidebar) {
         menuBtn.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
         });
-        }
-    </script>
+    }
+</script>
 
 </body>
 </html>
