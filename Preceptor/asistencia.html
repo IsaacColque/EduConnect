@@ -90,8 +90,8 @@
         <div class="navbar-right">
           <div class="user-profile-top">
             <div class="user-info-text">
-              <span class="user-name">Sebastian Guardia</span>
-              <span class="user-role">Preceptor</span>
+              <span class="user-name" id="user-name">Cargando...</span>
+              <span class="user-role" id="user-role">...</span>
             </div>
             <div class="avatar-container" aria-hidden="true">
               <i class="fa-solid fa-circle-user"></i>
@@ -253,9 +253,9 @@
   <div id="toast" class="toast hidden"></div>
 
   <!-- Scripts (Ajustá la ruta de tu sidebar.js si tenés uno para el botón hamburguesa) -->
-  <!-- <script src="/Preceptor/js/sidebar.js"></script> -->
+
   <script src="/Preceptor/js/asistencia.js"></script>
-  <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
+    <!-- SCRIPT DEL BOTÓN HAMBURGUESA -->
     <script>
         const menuBtn = document.getElementById('menu-btn');
         const sidebar = document.getElementById('sidebar');
@@ -265,6 +265,23 @@
                 sidebar.classList.toggle('collapsed');
             });
         }
+    </script>
+    <!-- SCRIPT DE PERFIL EN NAVBAR -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+      const nameSpan = document.getElementById('user-name');
+      const roleSpan = document.getElementById('user-role');
+
+      const nombreLocal = localStorage.getItem('usuarioNombre');
+      const rolLocal = localStorage.getItem('usuarioRol');
+
+      if (nombreLocal && rolLocal) {
+      if (nameSpan) nameSpan.textContent = `¡Hola, ${nombreLocal}!`;
+      if (roleSpan) roleSpan.textContent = rolLocal;
+      } else {
+      window.location.href = '../iniciar_sesion.html';
+      }
+      });
     </script>
 </body>
 </html>
