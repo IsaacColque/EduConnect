@@ -92,12 +92,10 @@
                     throw new Error('Error de inicio de sesión: ' + authError.message);
                 }
 
-                console.log('Usuario autenticado:', authData.user.id);
-
                 // 2. BUSCAR PERFIL
                 const { data: perfil, error: perfilError } = await supabaseClient
                     .from('perfiles')
-                    .select('rol')
+                    .select('nombre , apellido, rol')
                     .eq('id', authData.user.id)
                     .single();
 
@@ -105,9 +103,12 @@
                     throw new Error('Error al buscar el perfil: ' + perfilError.message);
                 }
 
-                console.log('Perfil encontrado:', perfil);
+                // 3. GUARDAR EN LOCALSTORAGE
+                const nombreCompleto = `${perfil.nombre || ''} ${perfil.apellido || ''}`.trim() || email;
+                localStorage.setItem('usuarioNombre', nombreCompleto);
+                localStorage.setItem('usuarioRol', perfil.rol);
 
-                // 3. VERIFICAR ROL Y REDIRIGIR
+                // 4. VERIFICAR ROL Y REDIRIGIR
                 let destino = '';
 
                 if (perfil.rol === 'estudiante' || perfil.rol === 'alumno') {
@@ -128,9 +129,7 @@
 
                 }
 
-                console.log('Destino:', destino);
-
-                // 4. REDIRECCIONAR
+                // 5. REDIRECCIONAR
                 window.location.assign(destino);
 
             } catch (error) {
